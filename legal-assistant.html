@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LexAI Thailand — ผู้ช่วยกฎหมาย AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{--navy:#1a2744;--navy2:#243460;--gold:#c9a84c;--gold2:#e2c47a;--white:#fff;--g50:#f8f9fa;--g100:#f0f1f3;--g200:#e2e4e8;--g400:#9ca3af;--g600:#6b7280;--g800:#1f2937;--green:#10b981;--font:'Sarabun',sans-serif;--r:12px;--r2:16px;--sh:0 4px 12px rgba(0,0,0,.12);--sh2:0 8px 32px rgba(0,0,0,.18);--tr:all .2s ease}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--g50);color:var(--g800);min-height:100vh}
+
+/* NAV */
+nav{background:var(--navy);position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,.25)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;height:64px;gap:1.5rem}
+.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;flex-shrink:0;cursor:pointer}
+.logo-icon{width:36px;height:36px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:1.1rem}
+.logo-text{color:#fff;font-weight:700;font-size:1.15rem}.logo-text span{color:var(--gold)}
+.nav-links{display:flex;gap:.15rem;flex:1;list-style:none}
+.nav-links a{color:rgba(255,255,255,.72);text-decoration:none;padding:.45rem .8rem;border-radius:6px;font-size:.92rem;transition:var(--tr);cursor:pointer;display:flex;align-items:center;gap:.35rem}
+.nav-links a:hover,.nav-links a.active{background:rgba(255,255,255,.1);color:#fff}
+.nav-links a.active{color:var(--gold)}
+.nav-cta{background:var(--gold)!important;color:var(--navy)!important;font-weight:700!important;border-radius:6px}
+.nav-cta:hover{background:var(--gold2)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;margin-left:auto;padding:4px}
+.hamburger span{width:24px;height:2px;background:#fff;border-radius:2px;transition:var(--tr)}
+.mob-menu{display:none;background:#111a30;padding:1rem 1.5rem;flex-direction:column;gap:.2rem}
+.mob-menu.open{display:flex}
+.mob-menu a{color:rgba(255,255,255,.8);text-decoration:none;padding:.6rem .75rem;border-radius:6px;font-size:.93rem;cursor:pointer;transition:var(--tr);display:flex;align-items:center;gap:.5rem}
+.mob-menu a:hover,.mob-menu a.active{background:rgba(255,255,255,.1);color:var(--gold)}
+
+/* PAGE SHOW/HIDE */
+.page{display:none}.page.active{display:block}
+
+/* PAGE HERO BAR */
+.ph{background:linear-gradient(135deg,var(--navy),var(--navy2));padding:2.5rem 1.5rem;color:#fff}
+.ph-in{max-width:1200px;margin:0 auto}
+.ph h1{font-size:1.8rem;font-weight:800;margin-bottom:.4rem}
+.ph p{color:rgba(255,255,255,.72);font-size:.97rem}
+.bc{font-size:.83rem;color:rgba(255,255,255,.45);margin-bottom:.75rem;display:flex;align-items:center;gap:.4rem}
+.bc span{color:var(--gold)}
+
+/* HOME HERO */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);padding:5rem 1.5rem 4rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-40%;left:-15%;width:55%;height:180%;background:radial-gradient(circle,rgba(201,168,76,.08) 0%,transparent 70%)}
+.hero-badge{display:inline-flex;align-items:center;gap:.45rem;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:var(--gold2);padding:.3rem 1rem;border-radius:50px;font-size:.82rem;margin-bottom:1.4rem}
+.hero h1{color:#fff;font-size:2.7rem;font-weight:800;line-height:1.2;margin-bottom:.9rem;position:relative;z-index:1}
+.hero h1 span{color:var(--gold)}
+.hero p{color:rgba(255,255,255,.72);font-size:1.1rem;max-width:580px;margin:0 auto 2.5rem;line-height:1.7;position:relative;z-index:1}
+.hero-search{max-width:640px;margin:0 auto 2rem;position:relative;z-index:1}
+.hero-search input{width:100%;padding:1.1rem 1.5rem 1.1rem 3.5rem;border-radius:50px;border:none;font-family:var(--font);font-size:1rem;box-shadow:0 8px 32px rgba(0,0,0,.25);outline:none;color:var(--g800)}
+.hero-search .si{position:absolute;left:1.2rem;top:50%;transform:translateY(-50%);color:var(--g400);font-size:1.1rem}
+.hero-search button{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:var(--gold);color:var(--navy);border:none;padding:.62rem 1.4rem;border-radius:50px;font-family:var(--font);font-size:.93rem;font-weight:700;cursor:pointer;transition:var(--tr)}
+.hero-search button:hover{background:var(--gold2)}
+.hero-stats{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;position:relative;z-index:1}
+.hs-num{color:var(--gold);font-size:1.75rem;font-weight:700}
+.hs-lbl{color:rgba(255,255,255,.55);font-size:.82rem}
+
+/* SECTION */
+.sec{max-width:1200px;margin:0 auto;padding:2.5rem 1.5rem}
+.sec-hd{margin-bottom:1.75rem}
+.sec-hd h2{font-size:1.5rem;font-weight:700;color:var(--navy);margin-bottom:.35rem}
+.sec-hd p{color:var(--g600);font-size:.95rem}
+
+/* CATEGORIES */
+.cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem}
+.cat-card{background:#fff;border-radius:var(--r);padding:1.4rem 1rem;text-align:center;cursor:pointer;transition:var(--tr);border:2px solid transparent;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.cat-card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:var(--sh)}
+.cat-ico{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin:0 auto .7rem}
+.cat-name{font-weight:700;font-size:.93rem;color:var(--navy);margin-bottom:.25rem}
+.cat-cnt{font-size:.78rem;color:var(--g600)}
+
+/* BANNERS */
+.banners{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:.5rem}
+.banner{border-radius:var(--r2);padding:2rem;display:flex;align-items:center;gap:1.4rem;cursor:pointer;transition:var(--tr);text-decoration:none}
+.banner:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
+.banner.b1{background:linear-gradient(135deg,var(--navy),var(--navy2))}
+.banner.b2{background:linear-gradient(135deg,#7a5c12,var(--gold))}
+.ban-ico{width:54px;height:54px;border-radius:14px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:1.55rem;flex-shrink:0}
+.ban-txt h3{color:#fff;font-size:1.08rem;font-weight:700;margin-bottom:.25rem}
+.ban-txt p{color:rgba(255,255,255,.78);font-size:.87rem}
+
+/* QUICK Q */
+.qq-wrap{display:flex;flex-wrap:wrap;gap:.65rem}
+.qq{background:#fff;border:1px solid var(--g200);border-radius:50px;padding:.45rem .95rem;font-size:.88rem;cursor:pointer;transition:var(--tr);font-family:var(--font);color:var(--g800)}
+.qq:hover{border-color:var(--gold);color:var(--navy);background:rgba(201,168,76,.06)}
+
+/* CHAT */
+.chat-wrap{max-width:860px;margin:0 auto;padding:2rem 1.5rem}
+.chat-hd{text-align:center;margin-bottom:1.75rem}
+.chat-hd h1{font-size:1.75rem;font-weight:700;color:var(--navy);margin-bottom:.4rem}
+.disc{display:inline-flex;align-items:center;gap:.45rem;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);color:#92400e;padding:.55rem 1.1rem;border-radius:var(--r);font-size:.84rem;margin-top:.6rem}
+.chatbox{background:#fff;border-radius:var(--r2);box-shadow:var(--sh);overflow:hidden}
+.chat-msgs{height:420px;overflow-y:auto;padding:1.5rem;display:flex;flex-direction:column;gap:1.2rem}
+.chat-msgs::-webkit-scrollbar{width:4px}
+.chat-msgs::-webkit-scrollbar-thumb{background:var(--g200);border-radius:2px}
+.msg{display:flex;gap:.7rem;max-width:85%}
+.msg.user{margin-left:auto;flex-direction:row-reverse}
+.av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.88rem;flex-shrink:0}
+.msg.ai .av{background:var(--navy);color:var(--gold)}
+.msg.user .av{background:var(--gold);color:var(--navy)}
+.bub{border-radius:var(--r);padding:.8rem 1.05rem;font-size:.93rem;line-height:1.65}
+.msg.ai .bub{background:var(--g50);color:var(--g800);border-radius:4px var(--r) var(--r) var(--r)}
+.msg.user .bub{background:var(--navy);color:#fff;border-radius:var(--r) 4px var(--r) var(--r)}
+.cite{display:inline-block;margin-top:.45rem;font-size:.78rem;background:rgba(201,168,76,.12);color:#7a5c12;border:1px solid rgba(201,168,76,.25);padding:.18rem .55rem;border-radius:4px}
+.typing{display:flex;align-items:center;gap:4px;padding:.8rem 1.05rem;background:var(--g50);border-radius:4px var(--r) var(--r) var(--r)}
+.td{width:7px;height:7px;background:var(--g400);border-radius:50%;animation:bounce 1.2s infinite}
+.td:nth-child(2){animation-delay:.2s}.td:nth-child(3){animation-delay:.4s}
+@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
+.chat-input-area{border-top:1px solid var(--g200);padding:1rem 1.25rem}
+.qp-wrap{margin-bottom:.75rem}
+.qp-wrap p{font-size:.82rem;color:var(--g600);margin-bottom:.4rem}
+.qp-btns{display:flex;flex-wrap:wrap;gap:.4rem}
+.qp-btn{background:var(--g50);border:1px solid var(--g200);border-radius:50px;padding:.35rem .85rem;font-size:.82rem;cursor:pointer;font-family:var(--font);transition:var(--tr);color:var(--g800)}
+.qp-btn:hover{border-color:var(--gold);background:rgba(201,168,76,.06)}
+.chat-row{display:flex;gap:.7rem;align-items:flex-end}
+.chat-row textarea{flex:1;border:1px solid var(--g200);border-radius:var(--r);padding:.7rem 1rem;font-family:var(--font);font-size:.93rem;resize:none;outline:none;min-height:48px;max-height:120px;transition:var(--tr);line-height:1.5}
+.chat-row textarea:focus{border-color:var(--gold)}
+.send-btn{width:48px;height:48px;border-radius:var(--r);background:var(--navy);color:#fff;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--tr);flex-shrink:0;font-size:1rem}
+.send-btn:hover{background:var(--navy2)}
+
+/* LEGAL LIBRARY */
+.lib-wrap{max-width:1200px;margin:0 auto;padding:2.5rem 1.5rem}
+.law-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
+.law-card{background:#fff;border-radius:var(--r2);overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.07);transition:var(--tr)}
+.law-card:hover{transform:translateY(-3px);box-shadow:var(--sh)}
+.law-hd{padding:1.15rem 1.4rem;display:flex;align-items:center;gap:.7rem}
+.law-hd h3{color:#fff;font-size:1rem;font-weight:700}
+.law-ico{width:38px;height:38px;border-radius:9px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:1rem;color:#fff}
+.law-body{padding:1.15rem 1.4rem}
+.law-item{padding:.65rem 0;border-bottom:1px solid var(--g100);cursor:pointer}
+.law-item:last-child{border-bottom:none}
+.law-item h4{font-size:.92rem;font-weight:600;color:var(--navy);margin-bottom:.2rem;display:flex;justify-content:space-between;align-items:center}
+.law-item h4 i{font-size:.75rem;color:var(--g400)}
+.law-item p{font-size:.84rem;color:var(--g600);line-height:1.5}
+.law-tag{display:inline-block;background:rgba(26,39,68,.08);color:var(--navy);padding:.15rem .5rem;border-radius:4px;font-size:.73rem;margin-top:.35rem}
+
+/* REFERENCES */
+.refs-wrap{max-width:1200px;margin:0 auto;padding:2.5rem 1.5rem}
+.ref-sec-title{display:flex;align-items:center;gap:.7rem;font-size:1.25rem;font-weight:700;color:var(--navy);margin-bottom:1.4rem;padding-bottom:.65rem;border-bottom:2px solid var(--gold)}
+.ref-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.2rem;margin-bottom:3rem}
+.ref-card{background:#fff;border-radius:var(--r2);padding:1.4rem;box-shadow:0 1px 4px rgba(0,0,0,.07);transition:var(--tr);border:1px solid transparent}
+.ref-card:hover{border-color:var(--gold);box-shadow:var(--sh);transform:translateY(-2px)}
+.ref-top{display:flex;align-items:flex-start;gap:.9rem;margin-bottom:.7rem}
+.ref-ico{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--navy),var(--navy2));display:flex;align-items:center;justify-content:center;font-size:1.25rem;color:var(--gold);flex-shrink:0}
+.ref-info h3{font-size:.97rem;font-weight:700;color:var(--navy);margin-bottom:.15rem}
+.ref-type{font-size:.78rem;color:var(--g400)}
+.ref-desc{font-size:.87rem;color:var(--g600);line-height:1.6;margin-bottom:.9rem}
+.ref-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--navy);color:#fff;padding:.45rem .95rem;border-radius:6px;text-decoration:none;font-size:.84rem;font-weight:600;transition:var(--tr)}
+.ref-btn:hover{background:var(--navy2)}
+
+/* BOOKS */
+.book-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem;margin-bottom:2rem}
+.book-card{background:#fff;border-radius:var(--r2);padding:1.4rem;box-shadow:0 1px 4px rgba(0,0,0,.07);display:flex;gap:1.1rem;transition:var(--tr);border:1px solid transparent}
+.book-card:hover{border-color:var(--gold);box-shadow:var(--sh)}
+.book-cov{width:68px;height:90px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:2rem;flex-shrink:0}
+.book-info h3{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:.25rem}
+.book-auth{font-size:.84rem;color:#7a5c12;font-weight:600;margin-bottom:.2rem}
+.book-pub{font-size:.78rem;color:var(--g400);margin-bottom:.45rem}
+.book-desc{font-size:.84rem;color:var(--g600);line-height:1.55}
+
+/* LAWYERS */
+.lawyers-wrap{max-width:1200px;margin:0 auto;padding:2.5rem 1.5rem}
+.filter-bar{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem}
+.fb{padding:.45rem 1rem;border-radius:50px;border:2px solid var(--g200);background:#fff;font-family:var(--font);font-size:.88rem;cursor:pointer;transition:var(--tr);color:var(--g600)}
+.fb:hover,.fb.active{border-color:var(--navy);background:var(--navy);color:#fff}
+.law-orgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1.4rem}
+.org-card{background:#fff;border-radius:var(--r2);overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.07);transition:var(--tr);border:1px solid transparent}
+.org-card:hover{transform:translateY(-3px);box-shadow:var(--sh);border-color:var(--gold)}
+.org-top{background:linear-gradient(135deg,var(--navy),var(--navy2));padding:1.2rem 1.4rem;display:flex;align-items:center;gap:.9rem}
+.org-ico{width:46px;height:46px;background:rgba(255,255,255,.15);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.25rem;color:var(--gold);flex-shrink:0}
+.org-hinfo h3{color:#fff;font-size:.97rem;font-weight:700;margin-bottom:.3rem;line-height:1.3}
+.sbadge{display:inline-flex;align-items:center;gap:.25rem;background:rgba(201,168,76,.25);color:var(--gold2);padding:.18rem .55rem;border-radius:4px;font-size:.76rem}
+.org-body{padding:1.2rem 1.4rem}
+.org-desc{font-size:.9rem;color:var(--g600);line-height:1.6;margin-bottom:.9rem}
+.org-detail{display:flex;align-items:center;gap:.45rem;font-size:.85rem;color:var(--g600);margin-bottom:.35rem}
+.org-detail i{color:var(--gold);width:15px}
+.org-acts{display:flex;gap:.7rem;margin-top:1.1rem;padding-top:1.1rem;border-top:1px solid var(--g100)}
+.btn-call{flex:1;display:flex;align-items:center;justify-content:center;gap:.35rem;background:var(--green);color:#fff;padding:.6rem;border-radius:6px;text-decoration:none;font-size:.87rem;font-weight:700;transition:var(--tr)}
+.btn-call:hover{background:#0d9e70}
+.btn-web{flex:1;display:flex;align-items:center;justify-content:center;gap:.35rem;background:var(--navy);color:#fff;padding:.6rem;border-radius:6px;text-decoration:none;font-size:.87rem;font-weight:700;transition:var(--tr)}
+.btn-web:hover{background:var(--navy2)}
+.free-badge{display:inline-flex;align-items:center;gap:.25rem;background:rgba(16,185,129,.1);color:#065f46;border:1px solid rgba(16,185,129,.3);padding:.2rem .6rem;border-radius:50px;font-size:.75rem;font-weight:700}
+.paid-badge{display:inline-flex;align-items:center;gap:.25rem;background:rgba(245,158,11,.1);color:#92400e;border:1px solid rgba(245,158,11,.35);padding:.2rem .6rem;border-radius:50px;font-size:.75rem;font-weight:700}
+
+/* TEMPLATES */
+.tpl-wrap{max-width:1200px;margin:0 auto;padding:2.5rem 1.5rem}
+.tpl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(275px,1fr));gap:1.4rem}
+.tpl-card{background:#fff;border-radius:var(--r2);overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.07);transition:var(--tr)}
+.tpl-card:hover{transform:translateY(-3px);box-shadow:var(--sh)}
+.tpl-prev{height:110px;display:flex;align-items:center;justify-content:center;font-size:3rem}
+.tpl-info{padding:1.15rem}
+.tpl-info h3{font-size:.97rem;font-weight:700;color:var(--navy);margin-bottom:.35rem}
+.tpl-info p{font-size:.85rem;color:var(--g600);line-height:1.5;margin-bottom:.8rem}
+.tpl-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.85rem}
+.tpl-tag{background:var(--g100);color:var(--g600);padding:.15rem .55rem;border-radius:4px;font-size:.76rem}
+.tpl-acts{display:flex;gap:.55rem}
+.btn-prev{flex:1;padding:.55rem;border:2px solid var(--navy);background:transparent;color:var(--navy);border-radius:6px;font-family:var(--font);font-size:.85rem;font-weight:600;cursor:pointer;transition:var(--tr)}
+.btn-prev:hover{background:var(--navy);color:#fff}
+.btn-dl{flex:1;padding:.55rem;background:var(--gold);color:var(--navy);border:none;border-radius:6px;font-family:var(--font);font-size:.85rem;font-weight:700;cursor:pointer;transition:var(--tr);display:flex;align-items:center;justify-content:center;gap:.3rem}
+.btn-dl:hover{background:var(--gold2)}
+
+/* MODAL */
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .2s}
+.modal-ov.open{opacity:1;pointer-events:all}
+.modal{background:#fff;border-radius:var(--r2);max-width:580px;width:100%;max-height:82vh;overflow-y:auto;transform:translateY(20px);transition:transform .2s}
+.modal-ov.open .modal{transform:translateY(0)}
+.mod-hd{background:var(--navy);padding:1.15rem 1.4rem;display:flex;align-items:center;justify-content:space-between}
+.mod-hd h3{color:#fff;font-size:1rem;font-weight:700}
+.mod-close{color:rgba(255,255,255,.7);background:none;border:none;font-size:1.2rem;cursor:pointer}
+.mod-close:hover{color:#fff}
+.mod-body{padding:1.4rem;font-size:.91rem;line-height:1.7;color:var(--g800)}
+.mod-body h4{color:var(--navy);font-weight:700;margin:1rem 0 .3rem}
+.mod-body p{margin-bottom:.6rem}
+.law-ref{background:var(--g50);border-left:3px solid var(--gold);padding:.6rem .9rem;border-radius:0 6px 6px 0;font-size:.87rem;color:var(--g600);margin:.7rem 0}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--navy);color:#fff;padding:.8rem 1.4rem;border-radius:var(--r);box-shadow:var(--sh2);font-size:.88rem;z-index:9999;display:flex;align-items:center;gap:.5rem;transform:translateY(80px);opacity:0;transition:all .3s}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* FOOTER */
+footer{background:#111a30;color:rgba(255,255,255,.5);text-align:center;padding:2rem 1.5rem;font-size:.85rem;margin-top:3rem}
+footer a{color:var(--gold);text-decoration:none}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav-links{display:none}.hamburger{display:flex}
+  .hero h1{font-size:1.85rem}.hero{padding:3rem 1.25rem 2.5rem}
+  .cat-grid{grid-template-columns:repeat(3,1fr)}
+  .banners{grid-template-columns:1fr}
+  .law-orgs,.ref-grid,.tpl-grid,.law-grid{grid-template-columns:1fr}
+  .book-grid{grid-template-columns:1fr}
+  .chat-msgs{height:300px}
+  .hero-stats{gap:1.5rem}
+}
+@media(min-width:769px) and (max-width:1024px){
+  .cat-grid{grid-template-columns:repeat(4,1fr)}
+  .law-orgs{grid-template-columns:repeat(2,1fr)}
+}
+/* SCOPE SECTION */
+.scope-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.scope-box{border-radius:var(--r);padding:1.25rem 1.35rem}
+.scope-box-ok{background:#f0fdf4;border:1px solid #bbf7d0}
+.scope-box-no{background:#fff7ed;border:1px solid #fed7aa}
+.scope-hd{display:flex;align-items:center;gap:.55rem;margin-bottom:.85rem;padding-bottom:.65rem;border-bottom:1px solid rgba(0,0,0,.08)}
+.scope-hd-icon{width:1.75rem;height:1.75rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;color:#fff;flex-shrink:0}
+.scope-item{padding:.45rem 0;border-bottom:1px solid rgba(0,0,0,.05);display:flex;gap:.5rem;align-items:flex-start}
+.scope-item:last-child{border-bottom:none;padding-bottom:0}
+.scope-emo{font-size:1rem;flex-shrink:0;margin-top:.05rem}
+.scope-txt{display:flex;flex-direction:column;gap:.15rem}
+.scope-cat{font-weight:700;font-size:.82rem;color:var(--navy)}
+.scope-law{font-size:.73rem;color:var(--g500);line-height:1.4}
+.scope-why{font-size:.73rem;color:#92400e;line-height:1.4}
+@media(max-width:768px){.scope-grid{grid-template-columns:1fr}}
+/* API BADGE & SETTINGS */
+.api-badge{display:inline-flex;align-items:center;gap:.35rem;padding:.22rem .65rem;border-radius:50px;font-size:.72rem;font-weight:600;cursor:default;border:none;font-family:inherit;transition:.2s;user-select:none}
+.api-badge-on{background:rgba(16,185,129,.12);color:#065f46;border:1px solid rgba(16,185,129,.3)}
+.api-badge-off{background:rgba(107,114,128,.1);color:#4b5563;border:1px solid rgba(107,114,128,.25)}
+.api-dot{width:.45rem;height:.45rem;border-radius:50%;flex-shrink:0}
+.api-dot-on{background:#10b981;box-shadow:0 0 0 2px rgba(16,185,129,.3)}
+.api-dot-off{background:#9ca3af}
+.s-label{display:block;font-size:.82rem;font-weight:700;color:var(--navy);margin-bottom:.35rem}
+.s-input{width:100%;padding:.62rem .85rem;border:1.5px solid var(--g300);border-radius:.5rem;font-size:.88rem;font-family:inherit;box-sizing:border-box;outline:none;transition:.2s}
+.s-input:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,39,68,.07)}
+.s-select{width:100%;padding:.62rem .85rem;border:1.5px solid var(--g300);border-radius:.5rem;font-size:.88rem;font-family:inherit;box-sizing:border-box;background:#fff;outline:none}
+.s-btn{width:100%;padding:.72rem;background:var(--navy);color:#fff;border:none;border-radius:.5rem;font-size:.9rem;font-weight:700;font-family:inherit;cursor:pointer;transition:.2s}
+.s-btn:hover{background:#243460}
+.s-btn-outline{width:100%;padding:.6rem;background:#fff;border:1.5px solid var(--g300);border-radius:.5rem;font-size:.85rem;font-weight:600;font-family:inherit;cursor:pointer}
+.s-info{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:.5rem;padding:.7rem .9rem;font-size:.8rem;color:#065f46;line-height:1.55}
+.s-warn{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.25);border-radius:.5rem;padding:.7rem .9rem;font-size:.8rem;color:#92400e;line-height:1.55}
+.s-err{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:.5rem;padding:.7rem .9rem;font-size:.8rem;color:#991b1b;line-height:1.55}
+.provider-tab{display:flex;gap:.5rem;margin-bottom:1rem}
+.p-tab{flex:1;padding:.5rem;border:1.5px solid var(--g300);border-radius:.5rem;font-size:.82rem;font-weight:600;font-family:inherit;cursor:pointer;background:#fff;color:var(--g600);transition:.2s;text-align:center}
+.p-tab.active{border-color:var(--navy);background:var(--navy);color:#fff}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="logo" onclick="showPage('home')">
+      <div class="logo-icon"><i class="fas fa-balance-scale"></i></div>
+      <div class="logo-text">
+        <div>Lex<span>AI</span></div>
+        <div style="font-size:.55rem;color:rgba(255,255,255,.45);font-weight:500;letter-spacing:.12em;margin-top:-1px">THAILAND</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a onclick="showPage('home')" id="nav-home" class="active"><i class="fas fa-home"></i> หน้าแรก</a></li>
+      <li><a onclick="showPage('chat')" id="nav-chat"><i class="fas fa-robot"></i> AI Chat</a></li>
+      <li><a onclick="showPage('library')" id="nav-library"><i class="fas fa-book"></i> ห้องสมุดกฎหมาย</a></li>
+      <li><a onclick="showPage('refs')" id="nav-refs"><i class="fas fa-link"></i> แหล่งอ้างอิง</a></li>
+      <li><a onclick="showPage('lawyers')" id="nav-lawyers"><i class="fas fa-user-tie"></i> หาทนาย</a></li>
+      <li><a onclick="showPage('templates')" id="nav-templates" class="nav-cta"><i class="fas fa-file-alt"></i> เอกสารตัวอย่าง</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMob()"><span></span><span></span><span></span></div>
+  </div>
+  <div class="mob-menu" id="mobMenu">
+    <a onclick="showPage('home');toggleMob()" id="mob-home" class="active"><i class="fas fa-home"></i> หน้าแรก</a>
+    <a onclick="showPage('chat');toggleMob()" id="mob-chat"><i class="fas fa-robot"></i> AI Chat</a>
+    <a onclick="showPage('library');toggleMob()" id="mob-library"><i class="fas fa-book"></i> ห้องสมุดกฎหมาย</a>
+    <a onclick="showPage('refs');toggleMob()" id="mob-refs"><i class="fas fa-link"></i> แหล่งอ้างอิง</a>
+    <a onclick="showPage('lawyers');toggleMob()" id="mob-lawyers"><i class="fas fa-user-tie"></i> หาทนาย</a>
+    <a onclick="showPage('templates');toggleMob()" id="mob-templates"><i class="fas fa-file-alt"></i> เอกสารตัวอย่าง</a>
+  </div>
+</nav>
+
+<!-- ========== HOME ========== -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-badge"><i class="fas fa-shield-alt"></i> ระบบปัญญาประดิษฐ์ทางกฎหมาย</div>
+    <h1>ผู้ช่วยกฎหมาย <span>AI</span><br>สำหรับทุกคน</h1>
+    <p>เข้าถึงข้อมูลกฎหมายไทยได้ง่ายขึ้น ค้นหา ศึกษา และรับคำแนะนำเบื้องต้นจาก AI โดยไม่ต้องมีพื้นฐานด้านกฎหมาย</p>
+    <div class="hero-search">
+      <i class="fas fa-search si"></i>
+      <input type="text" id="heroSearch" placeholder="ค้นหา เช่น โดนไล่ออกไม่ยุติธรรม, ถูกโกงเงิน, สัญญาเช่า..." onkeydown="if(event.key==='Enter')doSearch()">
+      <button onclick="doSearch()">ค้นหา</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hs-stat"><div class="hs-num">500+</div><div class="hs-lbl">กฎหมายไทย</div></div>
+      <div class="hs-stat"><div class="hs-num">1,200+</div><div class="hs-lbl">คำพิพากษา</div></div>
+      <div class="hs-stat"><div class="hs-num">7</div><div class="hs-lbl">องค์กรให้คำปรึกษา</div></div>
+      <div class="hs-stat"><div class="hs-num">24/7</div><div class="hs-lbl">AI พร้อมตอบ</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="banners">
+      <a class="banner b1" onclick="showPage('chat')">
+        <div class="ban-ico"><i class="fas fa-robot"></i></div>
+        <div class="ban-txt"><h3>ปรึกษา AI กฎหมาย</h3><p>ถามปัญหากฎหมายได้ทันที ตอบด้วยภาษาที่เข้าใจง่าย</p></div>
+      </a>
+      <a class="banner b2" onclick="showPage('lawyers')">
+        <div class="ban-ico"><i class="fas fa-user-tie"></i></div>
+        <div class="ban-txt"><h3>หาทนายและที่ปรึกษา</h3><p>เชื่อมต่อองค์กรและทนายความเพื่อขอความช่วยเหลือทางกฎหมาย</p></div>
+      </a>
+    </div>
+
+    <div class="sec-hd"><h2>เลือกหมวดหมู่ปัญหาของคุณ</h2><p>คลิกเพื่อดูข้อมูลกฎหมายที่เกี่ยวข้อง</p></div>
+    <div class="cat-grid">
+      <div class="cat-card" onclick="showPage('library')">
+        <div class="cat-ico" style="background:#fff3cd"><span style="font-size:1.4rem">⚖️</span></div>
+        <div class="cat-name">แรงงาน</div><div class="cat-cnt">8 กฎหมาย</div>
+      </div>
+      <div class="cat-card" onclick="showPage('library')">
+        <div class="cat-ico" style="background:#d1fae5"><span style="font-size:1.4rem">🏠</span></div>
+        <div class="cat-name">ที่ดิน</div><div class="cat-cnt">7 กฎหมาย</div>
+      </div>
+      <div class="cat-card" onclick="showPage('library')">
+        <div class="cat-ico" style="background:#fee2e2"><span style="font-size:1.4rem">👨‍👩‍👧</span></div>
+        <div class="cat-name">ครอบครัว</div><div class="cat-cnt">7 กฎหมาย</div>
+      </div>
+      <div class="cat-card" onclick="showPage('library')">
+        <div class="cat-ico" style="background:#dbeafe"><span style="font-size:1.4rem">🛒</span></div>
+        <div class="cat-name">ผู้บริโภค</div><div class="cat-cnt">7 กฎหมาย</div>
+      </div>
+      <div class="cat-card" onclick="showPage('library')">
+        <div class="cat-ico" style="background:#f3e8ff"><span style="font-size:1.4rem">🔒</span></div>
+        <div class="cat-name">อาญา</div><div class="cat-cnt">8 กฎหมาย</div>
+      </div>
+      <div class="cat-card" onclick="showPage('library')">
+        <div class="cat-ico" style="background:#fef3c7"><span style="font-size:1.4rem">📝</span></div>
+        <div class="cat-name">สัญญา</div><div class="cat-cnt">7 กฎหมาย</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" style="padding-top:0">
+    <div class="sec-hd"><h2>คำถามที่พบบ่อย</h2><p>คลิกเพื่อถาม AI ได้ทันที</p></div>
+    <div class="qq-wrap">
+      <div class="qq" onclick="askAI('โดนนายจ้างไล่ออกโดยไม่บอกล่วงหน้า ผมมีสิทธิ์อะไรบ้าง?')">โดนไล่ออกไม่ยุติธรรม</div>
+      <div class="qq" onclick="askAI('ถูกหลอกซื้อของออนไลน์ ควรทำอย่างไร?')">โดนหลอกซื้อของออนไลน์</div>
+      <div class="qq" onclick="askAI('นายจ้างค้างจ่ายเงินเดือน ทำอย่างไรได้บ้าง?')">นายจ้างค้างจ่ายเงินเดือน</div>
+      <div class="qq" onclick="askAI('เจ้าของบ้านไม่คืนเงินประกัน ผมมีสิทธิ์อะไร?')">เจ้าของบ้านไม่คืนเงินประกัน</div>
+      <div class="qq" onclick="askAI('ถูกกล่าวหาว่าทำร้ายร่างกาย ต้องทำอย่างไร?')">ถูกกล่าวหาว่าทำร้ายร่างกาย</div>
+      <div class="qq" onclick="askAI('อยากหย่าแต่คู่สมรสไม่ยินยอม ทำได้ไหม?')">อยากหย่าแต่คู่สมรสไม่ยอม</div>
+      <div class="qq" onclick="askAI('สัญญาเช่าหมดแต่เจ้าของบ้านไม่ต่อสัญญาและขอให้ออก มีสิทธิ์อะไรบ้าง?')">สัญญาเช่าหมดถูกไล่ออก</div>
+      <div class="qq" onclick="askAI('รถชนกัน ฝ่ายผิดไม่ยอมจ่ายค่าเสียหาย ทำอย่างไร?')">รถชนฝ่ายผิดไม่จ่าย</div>
+    </div>
+  </div>
+  <!-- ขอบเขตกฎหมาย LexAI -->
+  <div class="sec" style="padding-top:0">
+    <div class="sec-hd"><h2>ขอบเขตข้อกฎหมายของ LexAI</h2><p>ข้อกฎหมายที่ให้ข้อมูลได้ และหัวข้อที่ยังไม่ครอบคลุม</p></div>
+    <div class="scope-grid">
+
+      <!-- ✅ ครอบคลุม -->
+      <div class="scope-box scope-box-ok">
+        <div class="scope-hd">
+          <div class="scope-hd-icon" style="background:#16a34a"><i class="fas fa-check"></i></div>
+          <div>
+            <div style="font-weight:700;color:#15803d;font-size:.95rem">ให้ข้อมูลกฎหมายได้กว้างขวาง</div>
+            <div style="font-size:.75rem;color:#4ade80">ด้วย Gemini AI · ครอบคลุมทุกหมวดหมู่</div>
+          </div>
+        </div>
+        <div class="scope-item">
+          <span class="scope-emo">⚖️</span>
+          <div class="scope-txt">
+            <span class="scope-cat">แรงงาน — เลิกจ้าง / ค่าจ้าง</span>
+            <span class="scope-law">พ.ร.บ.คุ้มครองแรงงาน 2541 มาตรา 17, 30, 61, 70, 118, 144</span>
+          </div>
+        </div>
+        <div class="scope-item">
+          <span class="scope-emo">🏠</span>
+          <div class="scope-txt">
+            <span class="scope-cat">เช่าและทรัพย์สิน</span>
+            <span class="scope-law">ป.พ.พ. มาตรา 215, 538, 693</span>
+          </div>
+        </div>
+        <div class="scope-item">
+          <span class="scope-emo">🤕</span>
+          <div class="scope-txt">
+            <span class="scope-cat">ทำร้ายร่างกาย</span>
+            <span class="scope-law">ป.อาญา มาตรา 295, 296, 297, 300</span>
+          </div>
+        </div>
+        <div class="scope-item">
+          <span class="scope-emo">💻</span>
+          <div class="scope-txt">
+            <span class="scope-cat">โกงออนไลน์ / ฉ้อโกง</span>
+            <span class="scope-law">ป.อาญา มาตรา 341 · พ.ร.บ.คอมพิวเตอร์ 2560 มาตรา 14</span>
+          </div>
+        </div>
+        <div class="scope-item">
+          <span class="scope-emo">👨‍👩‍👧</span>
+          <div class="scope-txt">
+            <span class="scope-cat">ครอบครัว / หย่าร้าง</span>
+            <span class="scope-law">ป.พ.พ. มาตรา 1474, 1514, 1516, 1533</span>
+          </div>
+        </div>
+        <div class="scope-item">
+          <span class="scope-emo">🌍</span>
+          <div class="scope-txt">
+            <span class="scope-cat">ที่ดิน / บุกรุก / ครอบครองปรปักษ์</span>
+            <span class="scope-law">ป.พ.พ. มาตรา 1336, 1382 · ป.อาญา มาตรา 362</span>
+          </div>
+        </div>
+        <div class="scope-item">
+          <span class="scope-emo">💬</span>
+          <div class="scope-txt">
+            <span class="scope-cat">หมิ่นประมาท / ดูหมิ่น</span>
+            <span class="scope-law">ป.อาญา มาตรา 326, 328 · พ.ร.บ.คอมพิวเตอร์ มาตรา 14</span>
+          </div>
+        </div>
+        <div class="scope-item">
+          <span class="scope-emo">🚗</span>
+          <div class="scope-txt">
+            <span class="scope-cat">รถชน / ประกันภัย</span>
+            <span class="scope-law">ป.พ.พ. มาตรา 420 · พ.ร.บ.คุ้มครองผู้ประสบภัยจากรถ 2535</span>
+          </div>
+        </div>
+        <div class="scope-item">
+          <span class="scope-emo">🛒</span>
+          <div class="scope-txt">
+            <span class="scope-cat">ผู้บริโภค / สินค้าบกพร่อง</span>
+            <span class="scope-law">พ.ร.บ.คุ้มครองผู้บริโภค 2522 มาตรา 4 · ป.พ.พ. มาตรา 472</span>
+          </div>
+        </div>
+        <div class="scope-item">
+          <span class="scope-emo">💰</span>
+          <div class="scope-txt">
+            <span class="scope-cat">ละเมิดทั่วไป / เรียกค่าเสียหาย</span>
+            <span class="scope-law">ป.พ.พ. มาตรา 420, 423 · รัฐธรรมนูญ มาตรา 40</span>
+          </div>
+        </div>
+        <div class="scope-item">
+          <span class="scope-emo">💸</span>
+          <div class="scope-txt">
+            <span class="scope-cat">ภาษี / สรรพากร</span>
+            <span class="scope-law">ประมวลรัษฎากร · ภาษีเงินได้ ภาษีมูลค่าเพิ่ม ภาษีที่ดิน</span>
+          </div>
+        </div>
+        <div class="scope-item">
+          <span class="scope-emo">📜</span>
+          <div class="scope-txt">
+            <span class="scope-cat">มรดก / พินัยกรรม</span>
+            <span class="scope-law">ป.พ.พ. บรรพ 6 มาตรา 1600–1755</span>
+          </div>
+        </div>
+        <div class="scope-item">
+          <span class="scope-emo">🏢</span>
+          <div class="scope-txt">
+            <span class="scope-cat">บริษัท / สัญญาธุรกิจ</span>
+            <span class="scope-law">ป.พ.พ. บรรพ 3 · พ.ร.บ.บริษัทมหาชน 2535</span>
+          </div>
+        </div>
+        <div class="scope-item">
+          <span class="scope-emo">💡</span>
+          <div class="scope-txt">
+            <span class="scope-cat">ทรัพย์สินทางปัญญา</span>
+            <span class="scope-law">พ.ร.บ.ลิขสิทธิ์ 2537 · พ.ร.บ.เครื่องหมายการค้า 2534</span>
+          </div>
+        </div>
+        <div class="scope-item">
+          <span class="scope-emo">🏛️</span>
+          <div class="scope-txt">
+            <span class="scope-cat">กฎหมายปกครอง / ล้มละลาย</span>
+            <span class="scope-law">พ.ร.บ.ล้มละลาย 2483 · พ.ร.บ.จัดตั้งศาลปกครอง 2542</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ⚠️ ข้อจำกัดของ AI -->
+      <div class="scope-box scope-box-no">
+        <div class="scope-hd">
+          <div class="scope-hd-icon" style="background:#ea580c"><i class="fas fa-times"></i></div>
+          <div>
+            <div style="font-weight:700;color:#c2410c;font-size:.95rem">ข้อจำกัดของ AI</div>
+            <div style="font-size:.75rem;color:#fb923c">สิ่งที่ AI ไม่สามารถทำแทนได้</div>
+          </div>
+        </div>
+        <div class="scope-item">
+          <span class="scope-emo">🔮</span>
+          <div class="scope-txt">
+            <span class="scope-cat">ทำนายผลคดีไม่ได้</span>
+            <span class="scope-why">ผลขึ้นกับพยาน ข้อเท็จจริง และดุลยพินิจผู้พิพากษา</span>
+          </div>
+        </div>
+        <div class="scope-item">
+          <span class="scope-emo">📝</span>
+          <div class="scope-txt">
+            <span class="scope-cat">ไม่ใช่ทนายความ</span>
+            <span class="scope-why">ไม่สามารถรับรองเอกสาร ลงลายมือชื่อ หรือแถลงในศาลได้</span>
+          </div>
+        </div>
+        <div class="scope-item">
+          <span class="scope-emo">📅</span>
+          <div class="scope-txt">
+            <span class="scope-cat">ข้อมูลอาจล้าสมัย</span>
+            <span class="scope-why">กฎหมายมีการแก้ไข ควรตรวจสอบที่ krisdika.go.th เสมอ</span>
+          </div>
+        </div>
+        <div class="scope-item">
+          <span class="scope-emo">⚠️</span>
+          <div class="scope-txt">
+            <span class="scope-cat">คดีอาญารุนแรง</span>
+            <span class="scope-why">ฆาตกรรม ข่มขืน ยาเสพติด — ต้องมีทนายโดยด่วน</span>
+          </div>
+        </div>
+        <div class="scope-item">
+          <span class="scope-emo">📄</span>
+          <div class="scope-txt">
+            <span class="scope-cat">ดูเอกสาร / พยานหลักฐานไม่ได้</span>
+            <span class="scope-why">วิเคราะห์ได้เฉพาะข้อมูลที่คุณพิมพ์เล่าให้ฟังเท่านั้น</span>
+          </div>
+        </div>
+        <div class="scope-item">
+          <span class="scope-emo">🏛️</span>
+          <div class="scope-txt">
+            <span class="scope-cat">ดำเนินคดีแทนไม่ได้</span>
+            <span class="scope-why">ยื่นฟ้อง ไกล่เกลี่ย หรือเจรจาแทนในศาลไม่ได้</span>
+          </div>
+        </div>
+        <div style="margin-top:.85rem;padding:.65rem .8rem;background:rgba(234,88,12,.07);border-radius:.5rem;border-left:3px solid #ea580c">
+          <p style="margin:0;font-size:.78rem;color:#92400e;line-height:1.55"><strong>💡 คำแนะนำ:</strong> ใช้ LexAI เพื่อทำความเข้าใจสิทธิ์เบื้องต้นก่อน จากนั้นพบ <a href="#" onclick="showPage('lawyers')" style="color:#c2410c;font-weight:700">ทนายความ →</a> เพื่อดำเนินการจริง</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <div style="font-size:1.05rem;font-weight:700;color:rgba(255,255,255,.75);margin-bottom:.4rem">Lex<span style="color:var(--gold)">AI</span> <span style="font-weight:400;font-size:.8rem;letter-spacing:.1em;color:rgba(255,255,255,.4)">THAILAND</span></div>
+    <p>⚠️ ข้อมูลทั้งหมดมีวัตถุประสงค์เพื่อการศึกษาเท่านั้น ไม่ใช่คำปรึกษาทางกฎหมายอย่างเป็นทางการ<br>หากมีปัญหากฎหมายจริง ควรปรึกษา<a href="#" onclick="showPage('lawyers')"> ทนายความที่ได้รับใบอนุญาต</a></p>
+    <p style="margin-top:.6rem;font-size:.75rem;color:rgba(255,255,255,.25)">© 2025 LexAI Thailand · Powered by Google Gemini AI · เพื่อการศึกษาเท่านั้น</p>
+  </footer>
+</div>
+
+<!-- ========== CHAT ========== -->
+<div id="page-chat" class="page">
+  <div class="ph"><div class="ph-in"><div class="bc"><span onclick="showPage('home')" style="cursor:pointer">หน้าแรก</span> <i class="fas fa-chevron-right" style="font-size:.7rem"></i> <span>AI Chat</span></div><h1><i class="fas fa-robot" style="color:var(--gold)"></i> AI ให้คำปรึกษากฎหมาย</h1><p>ถามปัญหากฎหมายด้วยภาษาพูดธรรมดา AI จะอธิบายและแนะนำแนวทางเบื้องต้น</p></div></div>
+  <div class="chat-wrap">
+    <div class="disc" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem">
+      <span><i class="fas fa-exclamation-triangle"></i> ข้อมูลนี้เพื่อการศึกษาเท่านั้น ไม่ใช่คำปรึกษาทางกฎหมายอย่างเป็นทางการ</span>
+      <div id="apiBadge" class="api-badge api-badge-off">
+        <span class="api-dot api-dot-off" id="apiDot"></span>
+        <span id="apiLabel">เชื่อมต่อข้อมูล Gemini</span>
+      </div>
+    </div>
+    <div style="height:.75rem"></div>
+    <div class="chatbox">
+      <div class="chat-msgs" id="chatMsgs">
+        <div class="msg ai">
+          <div class="av"><i class="fas fa-robot"></i></div>
+          <div>
+            <div class="bub">สวัสดีครับ ผมคือ LexAI ผู้ช่วยด้านกฎหมายไทย 🏛️<br><br>คุณสามารถถามปัญหากฎหมายด้วยภาษาพูดธรรมดาได้เลย เช่น<br>• "โดนนายจ้างไล่ออกโดยไม่จ่ายค่าชดเชย"<br>• "ถูกทำร้ายร่างกาย ต้องแจ้งความอย่างไร"<br>• "เจ้าของบ้านไม่คืนเงินประกัน"<br><br>💡 <strong>เคล็ดลับ:</strong> ยิ่งบอกรายละเอียดมาก (เกิดที่ไหน ใครทำ เสียหายอย่างไร) ผมจะให้ข้อมูลกฎหมายได้ตรงกับสถานการณ์ของคุณมากขึ้นครับ</div>
+            <div style="font-size:.75rem;color:var(--g400);margin-top:.3rem">LexAI • ออนไลน์</div>
+          </div>
+        </div>
+      </div>
+      <div class="chat-input-area">
+        <div class="qp-wrap">
+          <p><i class="fas fa-bolt" style="color:var(--gold)"></i> คำถามยอดนิยม:</p>
+          <div class="qp-btns">
+            <button class="qp-btn" onclick="sendQuick('โดนนายจ้างไล่ออกโดยไม่จ่ายค่าชดเชย')">💼 โดนไล่ออกไม่จ่ายชดเชย</button>
+            <button class="qp-btn" onclick="sendQuick('เช่าบ้านแล้วเจ้าของไม่คืนเงินประกัน')">🏠 ไม่คืนเงินประกันบ้าน</button>
+            <button class="qp-btn" onclick="sendQuick('ถูกหลอกซื้อสินค้าออนไลน์ไม่ได้รับของ')">🛒 โดนโกงออนไลน์</button>
+            <button class="qp-btn" onclick="sendQuick('ถูกทำร้ายร่างกาย ต้องทำอย่างไร')">🤕 ถูกทำร้ายร่างกาย</button>
+            <button class="qp-btn" onclick="sendQuick('อยากฟ้องหย่า คู่สมรสไม่ยินยอม')">👨‍👩‍👧 ปัญหาครอบครัว</button>
+          </div>
+        </div>
+        <!-- Scope disclaimer -->
+        <div id="aiScope" style="margin:.5rem 0;border:1px solid var(--g200);border-radius:var(--r);overflow:hidden">
+          <button onclick="document.getElementById('scopeBody').style.display=document.getElementById('scopeBody').style.display==='none'?'block':'none';this.querySelector('i').classList.toggle('fa-chevron-down');this.querySelector('i').classList.toggle('fa-chevron-up')" style="width:100%;display:flex;align-items:center;justify-content:space-between;background:var(--g100);border:none;padding:.55rem .85rem;cursor:pointer;font-size:.8rem;color:var(--g600);font-family:inherit">
+            <span><i class="fas fa-info-circle" style="color:var(--navy);margin-right:.4rem"></i><strong>ขอบเขต LexAI</strong> — หัวข้อที่ให้ข้อมูลได้ และข้อจำกัด</span>
+            <i class="fas fa-chevron-down" style="font-size:.7rem;color:var(--g400)"></i>
+          </button>
+          <div id="scopeBody" style="display:none;padding:.75rem .9rem;font-size:.8rem;line-height:1.65;background:#fff">
+            <p style="margin:0 0 .5rem;font-weight:700;color:var(--navy)">✅ Gemini AI ให้ข้อมูลกฎหมายได้ครอบคลุม:</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.2rem .75rem;margin-bottom:.65rem">
+              <span>⚖️ แรงงาน — เลิกจ้าง ค่าชดเชย OT</span>
+              <span>🏠 เช่า — เงินประกัน สัญญาเช่า</span>
+              <span>👨‍👩‍👧 ครอบครัว — หย่า สินสมรส ลูก</span>
+              <span>🌍 ที่ดิน — โฉนด บุกรุก ครอบครองปรปักษ์</span>
+              <span>💸 ภาษี — เงินได้ มูลค่าเพิ่ม ที่ดิน</span>
+              <span>📜 มรดก — พินัยกรรม การรับมรดก</span>
+              <span>🏢 บริษัท — จดทะเบียน สัญญาธุรกิจ</span>
+              <span>💡 ทรัพย์สินทางปัญญา — ลิขสิทธิ์ สิทธิบัตร</span>
+              <span>💻 อาชญากรรมไซเบอร์ — โกงออนไลน์ แฮก</span>
+              <span>🏛️ กฎหมายปกครอง — ฟ้องหน่วยงานรัฐ</span>
+            </div>
+            <p style="margin:.5rem 0 .3rem;font-weight:700;color:#b91c1c">⚠️ ข้อจำกัดของ AI ที่ควรทราบ:</p>
+            <ul style="margin:0;padding-left:1.2rem;color:#374151">
+              <li>LexAI <strong>ไม่ใช่ทนายความ</strong> — ข้อมูลเบื้องต้นเท่านั้น ไม่ใช่คำปรึกษาทางกฎหมายอย่างเป็นทางการ</li>
+              <li><strong>ทำนายผลคดีไม่ได้</strong> — ผลขึ้นกับพยาน ข้อเท็จจริง และดุลยพินิจผู้พิพากษา</li>
+              <li>คดีอาญารุนแรง (ฆาตกรรม ข่มขืน ยาเสพติด) ต้อง<strong>มีทนายความโดยด่วน</strong></li>
+              <li>กฎหมายมีการแก้ไขอยู่เสมอ ตรวจสอบฉบับล่าสุดที่ <a href="https://www.krisdika.go.th" target="_blank" rel="noopener noreferrer" style="color:var(--navy)">krisdika.go.th</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="chat-row">
+          <textarea id="chatInput" placeholder="พิมพ์ปัญหากฎหมายของคุณ..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg()}"></textarea>
+          <button class="send-btn" onclick="sendMsg()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div style="font-size:1.05rem;font-weight:700;color:rgba(255,255,255,.75);margin-bottom:.4rem">Lex<span style="color:var(--gold)">AI</span> <span style="font-weight:400;font-size:.8rem;letter-spacing:.1em;color:rgba(255,255,255,.4)">THAILAND</span></div>
+    <p>⚠️ ข้อมูลทั้งหมดมีวัตถุประสงค์เพื่อการศึกษาเท่านั้น ไม่ใช่คำปรึกษาทางกฎหมายอย่างเป็นทางการ</p>
+    <p style="margin-top:.6rem;font-size:.75rem;color:rgba(255,255,255,.25)">© 2025 LexAI Thailand · Powered by Google Gemini AI</p>
+  </footer>
+</div>
+
+<!-- ========== LEGAL LIBRARY ========== -->
+<div id="page-library" class="page">
+  <div class="ph"><div class="ph-in"><div class="bc"><span onclick="showPage('home')" style="cursor:pointer">หน้าแรก</span> <i class="fas fa-chevron-right" style="font-size:.7rem"></i> <span>ห้องสมุดกฎหมาย</span></div><h1><i class="fas fa-book" style="color:var(--gold)"></i> ห้องสมุดกฎหมายไทย</h1><p>กฎหมายไทยอธิบายด้วยภาษาง่าย เข้าใจได้ทันที ไม่ต้องมีพื้นฐาน</p></div></div>
+  <div class="lib-wrap">
+    <div class="law-grid">
+      <!-- แรงงาน -->
+      <div class="law-card">
+        <div class="law-hd" style="background:linear-gradient(135deg,#d97706,#f59e0b)">
+          <div class="law-ico"><i class="fas fa-hard-hat"></i></div>
+          <h3>กฎหมายแรงงาน</h3>
+        </div>
+        <div class="law-body">
+          <div class="law-item" onclick="openLawModal('ค่าชดเชยการเลิกจ้าง','ถ้านายจ้างเลิกจ้างโดยไม่มีความผิด ลูกจ้างมีสิทธิ์ได้รับค่าชดเชย','มาตรา 118 พ.ร.บ. คุ้มครองแรงงาน 2541 กำหนดค่าชดเชยตามอายุงาน: ทำงาน 120 วัน-1 ปี → 30 วัน | 1-3 ปี → 90 วัน | 3-6 ปี → 180 วัน | 6-10 ปี → 240 วัน | 10-20 ปี → 300 วัน | 20 ปีขึ้นไป → 400 วัน')">
+            <h4>ค่าชดเชยการเลิกจ้าง <i class="fas fa-chevron-right"></i></h4>
+            <p>สิทธิ์รับเงินชดเชยเมื่อถูกเลิกจ้างโดยไม่มีความผิด</p>
+            <span class="law-tag">มาตรา 118</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('วันลาประจำปี','ลูกจ้างมีสิทธิ์ลาพักร้อนอย่างน้อยปีละ 6 วัน หลังทำงานครบ 1 ปี','มาตรา 30 พ.ร.บ. คุ้มครองแรงงาน 2541 กำหนดให้ลูกจ้างซึ่งทำงานติดต่อกันมาแล้วครบ 1 ปี มีสิทธิ์หยุดพักผ่อนประจำปีได้ปีหนึ่งไม่น้อยกว่า 6 วันทำงาน')">
+            <h4>วันลาพักร้อน <i class="fas fa-chevron-right"></i></h4>
+            <p>สิทธิ์วันหยุดพักผ่อนประจำปีที่ลูกจ้างได้รับ</p>
+            <span class="law-tag">มาตรา 30</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('ค่าล่วงเวลา (OT)','นายจ้างต้องจ่ายค่าล่วงเวลาไม่น้อยกว่า 1.5 เท่าของค่าจ้างปกติ','มาตรา 61 พ.ร.บ. คุ้มครองแรงงาน 2541: ค่าล่วงเวลา = 1.5 เท่า | ทำงานวันหยุด = 2 เท่า | ล่วงเวลาในวันหยุด = 3 เท่า ของอัตราค่าจ้างต่อชั่วโมง')">
+            <h4>ค่าล่วงเวลา (OT) <i class="fas fa-chevron-right"></i></h4>
+            <p>อัตราค่าจ้างล่วงเวลาที่กฎหมายกำหนด</p>
+            <span class="law-tag">มาตรา 61</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('ค่าจ้างขั้นต่ำ','นายจ้างต้องจ่ายค่าจ้างไม่ต่ำกว่าอัตราค่าจ้างขั้นต่ำที่กำหนด','มาตรา 70 พ.ร.บ. คุ้มครองแรงงาน 2541 ห้ามนายจ้างจ่ายค่าจ้างต่ำกว่าอัตราค่าจ้างขั้นต่ำ ปัจจุบันอยู่ที่ 363–400 บาท/วัน ขึ้นอยู่กับจังหวัด หากฝ่าฝืนมีโทษปรับไม่เกิน 100,000 บาท')">
+            <h4>ค่าจ้างขั้นต่ำ <i class="fas fa-chevron-right"></i></h4>
+            <p>กฎหมายคุ้มครองค่าจ้างขั้นต่ำและโทษหากฝ่าฝืน</p>
+            <span class="law-tag">มาตรา 70</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('วันลาคลอด','ลูกจ้างหญิงมีสิทธิ์ลาคลอด 98 วัน โดยได้รับค่าจ้าง 45 วัน','มาตรา 41 พ.ร.บ. คุ้มครองแรงงาน 2541 (แก้ไข 2562): ลูกจ้างหญิงลาคลอดได้ไม่เกิน 98 วัน รวมวันลาก่อนและหลังคลอด โดยนายจ้างจ่ายค่าจ้าง 45 วัน ส่วนที่เหลือรับจากประกันสังคม (กรณีส่งเงินสมทบ)')">
+            <h4>วันลาคลอด <i class="fas fa-chevron-right"></i></h4>
+            <p>สิทธิ์ลาคลอดของลูกจ้างหญิงและค่าจ้างระหว่างลา</p>
+            <span class="law-tag">มาตรา 41</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('การเลิกจ้างที่ไม่เป็นธรรม','นายจ้างเลิกจ้างโดยไม่มีเหตุอันสมควร ลูกจ้างฟ้องศาลแรงงานได้','มาตรา 49 พ.ร.บ. จัดตั้งศาลแรงงานฯ และมาตรา 8 พ.ร.บ. แรงงานสัมพันธ์: การเลิกจ้างที่ไม่เป็นธรรม ได้แก่ เลิกจ้างโดยไม่มีความผิด เพราะเหตุเจ็บป่วย หรือเหตุอื่นที่ไม่เป็นธรรม ศาลอาจสั่งให้รับกลับเข้าทำงานหรือชดใช้ค่าเสียหาย')">
+            <h4>เลิกจ้างไม่เป็นธรรม <i class="fas fa-chevron-right"></i></h4>
+            <p>สิทธิ์ฟ้องเมื่อถูกเลิกจ้างโดยไม่มีเหตุสมควร</p>
+            <span class="law-tag">พ.ร.บ. แรงงานสัมพันธ์</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('การหยุดงานและประท้วง','ลูกจ้างรวมตัวกันหยุดงานเพื่อเรียกร้องสิทธิ์ได้ภายใต้เงื่อนไขกฎหมาย','พ.ร.บ. แรงงานสัมพันธ์ 2518 มาตรา 34: ลูกจ้างมีสิทธิ์นัดหยุดงานโดยแจ้งล่วงหน้าไม่น้อยกว่า 24 ชั่วโมง หลังจากเจรจาตกลงกันไม่ได้และแจ้งพนักงานประนอมข้อพิพาทแรงงานแล้ว')">
+            <h4>การนัดหยุดงาน <i class="fas fa-chevron-right"></i></h4>
+            <p>สิทธิ์รวมตัวหยุดงานเพื่อเรียกร้องสิทธิ์แรงงาน</p>
+            <span class="law-tag">พ.ร.บ. แรงงานสัมพันธ์ มาตรา 34</span>
+          </div>
+        </div>
+      </div>
+      <!-- ที่ดิน -->
+      <div class="law-card">
+        <div class="law-hd" style="background:linear-gradient(135deg,#059669,#10b981)">
+          <div class="law-ico"><i class="fas fa-home"></i></div>
+          <h3>กฎหมายที่ดินและสัญญาเช่า</h3>
+        </div>
+        <div class="law-body">
+          <div class="law-item" onclick="openLawModal('สัญญาเช่าบ้าน','สัญญาเช่าที่มีกำหนดเวลาเกิน 3 ปี ต้องทำเป็นหนังสือและจดทะเบียนต่อพนักงานเจ้าหน้าที่','ประมวลกฎหมายแพ่งและพาณิชย์ มาตรา 538: การเช่าอสังหาริมทรัพย์นั้น ถ้ามิได้มีหลักฐานเป็นหนังสืออย่างหนึ่งอย่างใดลงลายมือชื่อฝ่ายที่ต้องรับผิดเป็นสำคัญ ท่านว่าจะฟ้องร้องให้บังคับคดีหาได้ไม่')">
+            <h4>สัญญาเช่าบ้าน <i class="fas fa-chevron-right"></i></h4>
+            <p>สิทธิ์และหน้าที่ของผู้เช่าและเจ้าของบ้าน</p>
+            <span class="law-tag">ป.พ.พ. มาตรา 538</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('เงินประกันการเช่า','เจ้าของบ้านต้องคืนเงินประกันเมื่อสัญญาสิ้นสุด หากไม่มีความเสียหาย','ตามประมวลกฎหมายแพ่งและพาณิชย์ มาตรา 693 เงินประกันต้องคืนเมื่อสัญญาเช่าสิ้นสุดลงและผู้เช่าไม่มีหนี้ค้างชำระ หากเจ้าของบ้านไม่คืนสามารถฟ้องเรียกคืนพร้อมดอกเบี้ย 7.5% ต่อปีได้')">
+            <h4>เงินประกันการเช่า <i class="fas fa-chevron-right"></i></h4>
+            <p>การเรียกคืนเงินประกันเมื่อสัญญาสิ้นสุด</p>
+            <span class="law-tag">ป.พ.พ. มาตรา 693</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('สิทธิผู้ครอบครองที่ดิน','การครอบครองที่ดินโดยสงบ เปิดเผย เจตนาเป็นเจ้าของ ติดต่อกัน 10 ปี มีสิทธิ์ฟ้องขอกรรมสิทธิ์','ประมวลกฎหมายแพ่งและพาณิชย์ มาตรา 1382: บุคคลใดครอบครองทรัพย์สินของผู้อื่นไว้โดยสุจริต โดยความสงบ และโดยเปิดเผยด้วยเจตนาเป็นเจ้าของ ถ้าเป็นอสังหาริมทรัพย์ได้ครอบครองติดต่อกันเป็นเวลา 10 ปี ท่านว่าบุคคลนั้นได้กรรมสิทธิ์')">
+            <h4>การครอบครองปรปักษ์ <i class="fas fa-chevron-right"></i></h4>
+            <p>ครอบครองที่ดิน 10 ปี อาจได้กรรมสิทธิ์</p>
+            <span class="law-tag">ป.พ.พ. มาตรา 1382</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('การจดทะเบียนโอนที่ดิน','การโอนกรรมสิทธิ์ที่ดินต้องจดทะเบียนต่อพนักงานเจ้าหน้าที่ที่ดิน','ป.พ.พ. มาตรา 1299: ภายในบังคับแห่งบทบัญญัติในประมวลกฎหมายนี้หรือกฎหมายอื่น การได้มาโดยนิติกรรมซึ่งอสังหาริมทรัพย์หรือทรัพยสิทธิอันเกี่ยวกับอสังหาริมทรัพย์นั้น ไม่บริบูรณ์ เว้นแต่นิติกรรมจะได้ทำเป็นหนังสือและได้จดทะเบียนการได้มากับพนักงานเจ้าหน้าที่')">
+            <h4>การโอนกรรมสิทธิ์ที่ดิน <i class="fas fa-chevron-right"></i></h4>
+            <p>ขั้นตอนและข้อกำหนดการโอนที่ดินอย่างถูกกฎหมาย</p>
+            <span class="law-tag">ป.พ.พ. มาตรา 1299</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('ทางจำเป็น','เจ้าของที่ดินที่ถูกล้อมรอบมีสิทธิ์ผ่านที่ดินข้างเคียงได้','ป.พ.พ. มาตรา 1349: ที่ดินที่ถูกล้อมโดยที่ดินแปลงอื่นๆ อยู่โดยรอบ เจ้าของที่ดินนั้นจะผ่านที่ดินซึ่งล้อมอยู่ไปสู่ทางสาธารณะได้ แต่ต้องเลือกทางที่สะดวกที่สุดแก่ที่ดินที่ถูกล้อม และเสียหายน้อยที่สุดแก่ที่ดินที่ถูกผ่าน')">
+            <h4>ทางจำเป็น (ทางสาธารณะ) <i class="fas fa-chevron-right"></i></h4>
+            <p>สิทธิ์ผ่านที่ดินเมื่อถูกล้อมโดยที่ดินผู้อื่น</p>
+            <span class="law-tag">ป.พ.พ. มาตรา 1349</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('ภาระจำยอม','สิทธิ์ใช้ที่ดินของผู้อื่นในบางส่วน เช่น ทางเดิน ท่อระบายน้ำ','ป.พ.พ. มาตรา 1387: อสังหาริมทรัพย์อาจต้องอยู่ในบังคับแห่งภาระจำยอม อันเป็นเหตุให้เจ้าของต้องยอมรับกรรมบางอย่างซึ่งกระทบถึงทรัพย์สินของตน หรือต้องงดเว้นการใช้สิทธิบางอย่างอันมีอยู่ในกรรมสิทธิ์ทรัพย์สินนั้น')">
+            <h4>ภาระจำยอม <i class="fas fa-chevron-right"></i></h4>
+            <p>สิทธิ์และหน้าที่ตามภาระจำยอมบนที่ดิน</p>
+            <span class="law-tag">ป.พ.พ. มาตรา 1387</span>
+          </div>
+        </div>
+      </div>
+      <!-- ครอบครัว -->
+      <div class="law-card">
+        <div class="law-hd" style="background:linear-gradient(135deg,#dc2626,#ef4444)">
+          <div class="law-ico"><i class="fas fa-heart"></i></div>
+          <h3>กฎหมายครอบครัว</h3>
+        </div>
+        <div class="law-body">
+          <div class="law-item" onclick="openLawModal('การหย่า','การหย่าทำได้ 2 วิธี คือ หย่าโดยความยินยอม หรือฟ้องหย่า','ป.พ.พ. มาตรา 1514: การหย่าจะทำได้แต่โดยความยินยอมของทั้งสองฝ่าย (หย่าโดยความยินยอม) หรือโดยคำพิพากษาของศาล มาตรา 1516 กำหนดเหตุฟ้องหย่า เช่น อีกฝ่ายนอกใจ ทารุณกรรม ทอดทิ้ง 3 ปี เป็นต้น')">
+            <h4>การหย่าร้าง <i class="fas fa-chevron-right"></i></h4>
+            <p>เงื่อนไขและขั้นตอนการหย่าตามกฎหมาย</p>
+            <span class="law-tag">ป.พ.พ. มาตรา 1514</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('สิทธิ์ในทรัพย์สินสมรส','สินสมรสคือทรัพย์สินที่คู่สมรสได้มาระหว่างสมรส ต้องแบ่งคนละครึ่ง','ป.พ.พ. มาตรา 1474: สินสมรส ได้แก่ ทรัพย์สินที่คู่สมรสได้มาระหว่างสมรส | ทรัพย์สินที่ฝ่ายใดฝ่ายหนึ่งได้มาโดยพินัยกรรม หรือโดยการให้เป็นหนังสือระหว่างสมรส เมื่อหย่าแบ่งสินสมรสคนละครึ่งตาม มาตรา 1533')">
+            <h4>สินสมรสและการแบ่ง <i class="fas fa-chevron-right"></i></h4>
+            <p>ทรัพย์สินที่เกิดระหว่างสมรสต้องแบ่งกันอย่างไร</p>
+            <span class="law-tag">ป.พ.พ. มาตรา 1474</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('ค่าอุปการะเลี้ยงดูบุตร','บิดามารดามีหน้าที่อุปการะเลี้ยงดูบุตรจนบรรลุนิติภาวะ','ป.พ.พ. มาตรา 1564: บิดามารดาจำต้องอุปการะเลี้ยงดูและให้การศึกษาตามสมควรแก่บุตรในระหว่างที่เป็นผู้เยาว์ ศาลจะกำหนดจำนวนค่าอุปการะตามความสามารถของผู้มีหน้าที่ตามฐานะแห่งบุตร')">
+            <h4>ค่าอุปการะบุตร <i class="fas fa-chevron-right"></i></h4>
+            <p>หน้าที่เลี้ยงดูบุตรและการกำหนดค่าอุปการะ</p>
+            <span class="law-tag">ป.พ.พ. มาตรา 1564</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('อำนาจปกครองบุตร','เมื่อหย่า ศาลมีอำนาจตัดสินว่าใครมีสิทธิ์ปกครองบุตร','ป.พ.พ. มาตรา 1520: เมื่อหย่ากัน ให้ตกลงกันเองว่าฝ่ายใดจะเป็นผู้ใช้อำนาจปกครองบุตร ถ้าตกลงกันไม่ได้ หรือไม่ได้ตกลง ให้ศาลเป็นผู้ชี้ขาด โดยคำนึงถึงประโยชน์สูงสุดของบุตรเป็นสำคัญ')">
+            <h4>อำนาจปกครองบุตรหลังหย่า <i class="fas fa-chevron-right"></i></h4>
+            <p>ศาลตัดสินสิทธิ์ปกครองบุตรโดยคำนึงถึงประโยชน์เด็ก</p>
+            <span class="law-tag">ป.พ.พ. มาตรา 1520</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('มรดกและพินัยกรรม','เมื่อเจ้ามรดกตาย ทรัพย์สินตกแก่ทายาทตามกฎหมายหรือพินัยกรรม','ป.พ.พ. มาตรา 1599: เมื่อบุคคลใดตาย มรดกของบุคคลนั้นตกทอดแก่ทายาท ทายาทโดยธรรมมี 6 ลำดับ: (1) ผู้สืบสันดาน (2) บิดามารดา (3) พี่น้องร่วมบิดามารดา (4) พี่น้องร่วมบิดาหรือมารดา (5) ปู่ย่าตายาย (6) ลุงป้าน้าอา')">
+            <h4>ลำดับทายาทมรดก <i class="fas fa-chevron-right"></i></h4>
+            <p>ลำดับทายาทที่มีสิทธิ์รับมรดกตามกฎหมาย</p>
+            <span class="law-tag">ป.พ.พ. มาตรา 1599–1630</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('การจดทะเบียนสมรส','การสมรสต้องจดทะเบียนต่อนายทะเบียน จึงจะมีผลตามกฎหมาย','ป.พ.พ. มาตรา 1457: การสมรสตามประมวลกฎหมายนี้จะมีได้เฉพาะเมื่อได้จดทะเบียนแล้วเท่านั้น การสมรสที่ไม่ได้จดทะเบียนไม่มีผลตามกฎหมาย แม้จะอยู่กินด้วยกันมานานเพียงใดก็ตาม')">
+            <h4>การสมรสตามกฎหมาย <i class="fas fa-chevron-right"></i></h4>
+            <p>เงื่อนไขและการจดทะเบียนสมรสให้ถูกต้องตามกฎหมาย</p>
+            <span class="law-tag">ป.พ.พ. มาตรา 1457</span>
+          </div>
+        </div>
+      </div>
+      <!-- ผู้บริโภค -->
+      <div class="law-card">
+        <div class="law-hd" style="background:linear-gradient(135deg,#2563eb,#3b82f6)">
+          <div class="law-ico"><i class="fas fa-shopping-cart"></i></div>
+          <h3>กฎหมายผู้บริโภค</h3>
+        </div>
+        <div class="law-body">
+          <div class="law-item" onclick="openLawModal('สิทธิ์คืนสินค้า','ผู้บริโภคมีสิทธิ์คืนสินค้าที่ชำรุดบกพร่องหรือไม่ตรงตามที่โฆษณา','พ.ร.บ. คุ้มครองผู้บริโภค 2522 มาตรา 4: ผู้บริโภคมีสิทธิ์ได้รับความปลอดภัยจากการใช้สินค้า, สิทธิ์ได้รับข้อมูลที่ถูกต้อง, สิทธิ์เลือกซื้อสินค้าอย่างอิสระ และสิทธิ์ได้รับความเป็นธรรมในการทำสัญญา')">
+            <h4>สิทธิ์คืนสินค้าชำรุด <i class="fas fa-chevron-right"></i></h4>
+            <p>เมื่อได้รับสินค้าชำรุดหรือไม่ตรงตามที่โฆษณา</p>
+            <span class="law-tag">พ.ร.บ. คุ้มครองผู้บริโภค 2522</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('สัญญาไม่เป็นธรรม','ข้อสัญญาที่เอาเปรียบผู้บริโภคมากเกินไป ศาลอาจพิพากษาให้สัญญานั้นใช้บังคับได้แต่เพียงบางส่วน','พ.ร.บ. ว่าด้วยข้อสัญญาที่ไม่เป็นธรรม 2540 มาตรา 10: ข้อสัญญาในสัญญาระหว่างผู้บริโภคกับผู้ประกอบธุรกิจที่ทำให้ผู้ประกอบธุรกิจได้เปรียบผู้บริโภคเกินสมควร เป็นข้อสัญญาที่ไม่เป็นธรรม มีผลบังคับได้เพียงเท่าที่เป็นธรรมและพอสมควรแก่กรณี')">
+            <h4>สัญญาไม่เป็นธรรม <i class="fas fa-chevron-right"></i></h4>
+            <p>เงื่อนไขสัญญาที่เอาเปรียบผู้บริโภค</p>
+            <span class="law-tag">พ.ร.บ. สัญญาไม่เป็นธรรม 2540</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('การฉ้อโกงออนไลน์','การซื้อขายออนไลน์แล้วไม่ได้รับสินค้า ผู้เสียหายมีสิทธิ์แจ้งความดำเนินคดีทางอาญา','ประมวลกฎหมายอาญา มาตรา 341: ผู้ใดโดยทุจริต หลอกลวงผู้อื่นด้วยการแสดงข้อความอันเป็นเท็จ ต้องระวางโทษจำคุกไม่เกิน 3 ปี หรือปรับไม่เกิน 60,000 บาท หรือทั้งจำทั้งปรับ')">
+            <h4>โดนหลอกซื้อของออนไลน์ <i class="fas fa-chevron-right"></i></h4>
+            <p>ขั้นตอนการแจ้งความและเรียกร้องค่าเสียหาย</p>
+            <span class="law-tag">ป.อาญา มาตรา 341</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('การเรียกค่าเสียหาย','ผู้บริโภคสามารถฟ้องแพ่งเรียกค่าเสียหายจากสินค้าที่ก่อความเสียหายได้','พ.ร.บ. ความรับผิดต่อความเสียหายที่เกิดจากสินค้าที่ไม่ปลอดภัย พ.ศ. 2551 มาตรา 5: ผู้ประกอบการต้องรับผิดในความเสียหายที่เกิดจากสินค้าที่ไม่ปลอดภัย แม้ไม่มีความจงใจหรือประมาทเลินเล่อ ผู้เสียหายไม่ต้องพิสูจน์ความผิดของผู้ประกอบการ')">
+            <h4>สินค้าก่อความเสียหาย <i class="fas fa-chevron-right"></i></h4>
+            <p>สิทธิ์เรียกค่าเสียหายจากสินค้าที่ไม่ปลอดภัย</p>
+            <span class="law-tag">พ.ร.บ. สินค้าไม่ปลอดภัย 2551</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('การโฆษณาเกินจริง','โฆษณาสินค้าหรือบริการด้วยข้อมูลเท็จมีความผิดตามกฎหมาย','พ.ร.บ. คุ้มครองผู้บริโภค 2522 มาตรา 22: การโฆษณาจะต้องไม่ใช้ข้อความที่เป็นการไม่เป็นธรรมแก่ผู้บริโภค หรือที่อาจก่อให้เกิดผลเสียต่อสังคมส่วนรวม ผู้โฆษณาที่ฝ่าฝืนมีโทษปรับไม่เกิน 100,000 บาท')">
+            <h4>โฆษณาเกินจริง <i class="fas fa-chevron-right"></i></h4>
+            <p>การโฆษณาหลอกลวงผู้บริโภคมีโทษตามกฎหมาย</p>
+            <span class="law-tag">พ.ร.บ. คุ้มครองผู้บริโภค มาตรา 22</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('สิทธิ์ยกเลิกสัญญา 7 วัน','สัญญาขายตรงและขายนอกสถานประกอบการ ผู้บริโภคยกเลิกได้ใน 7 วัน','พ.ร.บ. ขายตรงและตลาดแบบตรง 2545 มาตรา 36: ผู้บริโภคมีสิทธิ์บอกเลิกสัญญาภายใน 7 วันนับแต่วันที่ทำสัญญา หรือวันที่ได้รับสินค้า โดยส่งหนังสือบอกเลิกเป็นลายลักษณ์อักษร และไม่ต้องรับผิดชอบค่าใช้จ่ายใดๆ')">
+            <h4>ยกเลิกสัญญาขายตรงใน 7 วัน <i class="fas fa-chevron-right"></i></h4>
+            <p>สิทธิ์ยกเลิกสัญญาขายตรงและประกันชีวิตภายใน 7 วัน</p>
+            <span class="law-tag">พ.ร.บ. ขายตรง 2545 มาตรา 36</span>
+          </div>
+        </div>
+      </div>
+      <!-- อาญา -->
+      <div class="law-card">
+        <div class="law-hd" style="background:linear-gradient(135deg,#7c3aed,#8b5cf6)">
+          <div class="law-ico"><i class="fas fa-gavel"></i></div>
+          <h3>กฎหมายอาญา</h3>
+        </div>
+        <div class="law-body">
+          <div class="law-item" onclick="openLawModal('การแจ้งความ','ผู้เสียหายสามารถแจ้งความได้ที่สถานีตำรวจท้องที่ที่เกิดเหตุ ภายในอายุความ','คดีอาญาส่วนใหญ่มีอายุความ 10-20 ปีขึ้นอยู่กับโทษ คดีที่โทษจำคุกไม่เกิน 1 ปี มีอายุความ 1 ปี คดีที่โทษจำคุกไม่เกิน 7 ปี มีอายุความ 10 ปี หลักฐานที่ควรเตรียม: บันทึกภาพถ่าย, พยาน, เอกสารหลักฐาน')">
+            <h4>ขั้นตอนการแจ้งความ <i class="fas fa-chevron-right"></i></h4>
+            <p>วิธีแจ้งความและหลักฐานที่ต้องเตรียม</p>
+            <span class="law-tag">ป.วิ.อาญา มาตรา 2</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('สิทธิ์ผู้ต้องหา','ผู้ต้องหามีสิทธิ์ได้รับการแจ้งข้อหา พบทนาย และไม่ต้องให้การ','รัฐธรรมนูญ มาตรา 29 และ ป.วิ.อาญา มาตรา 7/1: ผู้ต้องหามีสิทธิ์ได้รับการแจ้งข้อกล่าวหา ไม่ต้องให้การในสิ่งที่เป็นโทษตนเอง พบและปรึกษาทนายความ ยื่นขอประกันตัว')">
+            <h4>สิทธิ์ของผู้ต้องหา <i class="fas fa-chevron-right"></i></h4>
+            <p>สิทธิ์ที่กฎหมายคุ้มครองเมื่อถูกจับกุม</p>
+            <span class="law-tag">รัฐธรรมนูญ มาตรา 29</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('หมิ่นประมาท','การพูดหรือเขียนข้อความเท็จทำให้ผู้อื่นเสียชื่อเสียง มีโทษทั้งทางอาญาและแพ่ง','ป.อาญา มาตรา 326: ผู้ใดใส่ความผู้อื่นต่อบุคคลที่สาม โดยประการที่น่าจะทำให้ผู้อื่นนั้นเสียชื่อเสียง ถูกดูหมิ่น หรือถูกเกลียดชัง ผู้นั้นกระทำความผิดฐานหมิ่นประมาท ต้องระวางโทษจำคุกไม่เกิน 1 ปี หรือปรับไม่เกิน 20,000 บาท')">
+            <h4>หมิ่นประมาท <i class="fas fa-chevron-right"></i></h4>
+            <p>ข้อความที่ทำให้ผู้อื่นเสียชื่อเสียงมีโทษอย่างไร</p>
+            <span class="law-tag">ป.อาญา มาตรา 326</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('ความผิดทางคอมพิวเตอร์','การโพสต์ข้อความเท็จหรือข้อมูลเสียหายออนไลน์มีโทษตาม พ.ร.บ. คอมพิวเตอร์','พ.ร.บ. ว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ 2550 มาตรา 14: ผู้ใดนำเข้าข้อมูลอันเป็นเท็จหรือก่อให้เกิดความตื่นตระหนก หรือข้อมูลที่เป็นความผิดเกี่ยวกับความมั่นคง มีโทษจำคุกไม่เกิน 5 ปี หรือปรับไม่เกิน 100,000 บาท')">
+            <h4>ความผิดทางคอมพิวเตอร์ <i class="fas fa-chevron-right"></i></h4>
+            <p>การโพสต์ข้อความเท็จออนไลน์มีโทษตาม พ.ร.บ. คอมพิวเตอร์</p>
+            <span class="law-tag">พ.ร.บ. คอมพิวเตอร์ มาตรา 14</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('การประกันตัว','ผู้ต้องหาหรือจำเลยมีสิทธิ์ยื่นขอประกันตัวระหว่างสอบสวนหรือพิจารณาคดี','ป.วิ.อาญา มาตรา 106: ผู้ต้องหาหรือจำเลยอาจยื่นคำร้องขอปล่อยชั่วคราวได้ทุกชั้นของการดำเนินคดี ศาลพิจารณาจากพฤติการณ์แห่งคดี โทษ และความเป็นไปได้ที่ผู้ต้องหาจะหลบหนี')">
+            <h4>การยื่นประกันตัว <i class="fas fa-chevron-right"></i></h4>
+            <p>สิทธิ์และขั้นตอนการขอปล่อยตัวชั่วคราว</p>
+            <span class="law-tag">ป.วิ.อาญา มาตรา 106</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('ความผิดลหุโทษ','ความผิดเล็กน้อยมีโทษปรับไม่เกิน 10,000 บาท หรือจำคุกไม่เกิน 1 เดือน','ป.อาญา มาตรา 102: ความผิดลหุโทษ ได้แก่ ความผิดซึ่งกฎหมายบัญญัติโทษจำคุกไม่เกินหนึ่งเดือน หรือปรับไม่เกินหนึ่งหมื่นบาท หรือทั้งจำทั้งปรับ เช่น ทะเลาะวิวาทในที่สาธารณะ ความผิดฐานเมาสุราในที่สาธารณะ')">
+            <h4>ความผิดลหุโทษ <i class="fas fa-chevron-right"></i></h4>
+            <p>ความผิดเล็กน้อยและโทษที่กฎหมายกำหนด</p>
+            <span class="law-tag">ป.อาญา มาตรา 102</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('อายุความคดีอาญา','คดีอาญาต้องฟ้องภายในอายุความ มิฉะนั้นสิทธิ์ฟ้องระงับ','ป.อาญา มาตรา 95: อายุความฟ้องคดีอาญา: โทษประหาร/จำคุกตลอดชีวิต = 20 ปี | โทษจำคุก 7-20 ปี = 15 ปี | โทษจำคุกไม่เกิน 7 ปี = 10 ปี | โทษจำคุกไม่เกิน 1 ปี = 1 ปี | ความผิดลหุโทษ = 1 ปี')">
+            <h4>อายุความคดีอาญา <i class="fas fa-chevron-right"></i></h4>
+            <p>ระยะเวลาที่กฎหมายกำหนดในการฟ้องคดีอาญา</p>
+            <span class="law-tag">ป.อาญา มาตรา 95</span>
+          </div>
+        </div>
+      </div>
+      <!-- สัญญา -->
+      <div class="law-card">
+        <div class="law-hd" style="background:linear-gradient(135deg,#0f766e,#14b8a6)">
+          <div class="law-ico"><i class="fas fa-file-signature"></i></div>
+          <h3>กฎหมายสัญญา</h3>
+        </div>
+        <div class="law-body">
+          <div class="law-item" onclick="openLawModal('สัญญาที่ใช้บังคับได้','สัญญาที่สมบูรณ์ต้องมีคู่สัญญา ข้อเสนอและการตอบรับ วัตถุประสงค์ชัดเจน','ป.พ.พ. มาตรา 149: นิติกรรม หมายความว่า การใดๆอันทำลงโดยชอบด้วยกฎหมายและด้วยใจสมัคร มุ่งโดยตรงต่อการผูกนิติสัมพันธ์ขึ้นระหว่างบุคคล เพื่อจะก่อ เปลี่ยนแปลง โอน สงวน หรือระงับซึ่งสิทธิ์')">
+            <h4>สัญญาที่สมบูรณ์ <i class="fas fa-chevron-right"></i></h4>
+            <p>องค์ประกอบที่ทำให้สัญญาใช้บังคับได้ตามกฎหมาย</p>
+            <span class="law-tag">ป.พ.พ. มาตรา 149</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('การผิดสัญญา','เมื่อผิดสัญญา ผู้เสียหายมีสิทธิ์เรียกค่าเสียหายหรือบังคับให้ปฏิบัติตามสัญญา','ป.พ.พ. มาตรา 213: ถ้าลูกหนี้ละเลยเสียไม่ชำระหนี้ เจ้าหนี้จะร้องขอต่อศาลให้สั่งบังคับก็ได้ เว้นแต่สภาพแห่งหนี้จะไม่เปิดช่องให้ทำเช่นนั้น มาตรา 222: ค่าสินไหมทดแทนนั้นได้แก่ค่าเสียหายเพื่อความเสียหายอันเกิดแต่การละเมิดนั้น รวมทั้งค่าเสียหายอันเป็นลักษณะพิเศษด้วย')">
+            <h4>การผิดสัญญา <i class="fas fa-chevron-right"></i></h4>
+            <p>สิทธิ์เรียกร้องค่าเสียหายเมื่อคู่สัญญาผิดนัด</p>
+            <span class="law-tag">ป.พ.พ. มาตรา 213</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('สัญญากู้ยืมเงิน','สัญญากู้ยืมเงินเกิน 2,000 บาท ต้องทำเป็นหนังสือลงลายมือชื่อผู้กู้','ป.พ.พ. มาตรา 653: การกู้ยืมเงินกว่าสองพันบาทขึ้นไป ถ้ามิได้มีหลักฐานเป็นหนังสืออย่างใดอย่างหนึ่งลงลายมือชื่อผู้ยืมเป็นสำคัญ ท่านว่าจะฟ้องร้องบังคับคดีไม่ได้')">
+            <h4>สัญญากู้ยืมเงิน <i class="fas fa-chevron-right"></i></h4>
+            <p>รูปแบบสัญญากู้ที่ใช้บังคับได้ตามกฎหมาย</p>
+            <span class="law-tag">ป.พ.พ. มาตรา 653</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('ดอกเบี้ยสูงสุดตามกฎหมาย','การคิดดอกเบี้ยเกินอัตราที่กฎหมายกำหนดมีโทษทางอาญา','ป.พ.พ. มาตรา 654 และ พ.ร.บ. ห้ามเรียกดอกเบี้ยเกินอัตรา 2560: ดอกเบี้ยสูงสุดในสัญญาทั่วไป ไม่เกิน 15% ต่อปี หากเกินกว่านั้นถือเป็นโมฆะเฉพาะส่วนดอกเบี้ย และผู้ให้กู้มีโทษจำคุกไม่เกิน 2 ปี')">
+            <h4>ดอกเบี้ยสูงสุดตามกฎหมาย <i class="fas fa-chevron-right"></i></h4>
+            <p>อัตราดอกเบี้ยสูงสุดที่กฎหมายอนุญาต</p>
+            <span class="law-tag">ป.พ.พ. มาตรา 654</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('สัญญาซื้อขาย','สัญญาซื้อขายสังหาริมทรัพย์ราคาตั้งแต่ 20,000 บาท ต้องมีหลักฐานเป็นหนังสือ','ป.พ.พ. มาตรา 456: การซื้อขายอสังหาริมทรัพย์ต้องทำเป็นหนังสือและจดทะเบียน ถ้าไม่ทำเช่นนั้นเป็นโมฆะ สังหาริมทรัพย์ที่มีราคาตั้งแต่ 20,000 บาท หากไม่มีหลักฐานเป็นหนังสือจะฟ้องร้องบังคับคดีไม่ได้')">
+            <h4>สัญญาซื้อขาย <i class="fas fa-chevron-right"></i></h4>
+            <p>รูปแบบและข้อกำหนดสัญญาซื้อขายที่ใช้บังคับได้</p>
+            <span class="law-tag">ป.พ.พ. มาตรา 456</span>
+          </div>
+          <div class="law-item" onclick="openLawModal('อายุความคดีแพ่ง','สิทธิ์ฟ้องคดีแพ่งจะขาดอายุความหากไม่ฟ้องภายในระยะเวลาที่กฎหมายกำหนด','ป.พ.พ. มาตรา 193/30: อายุความทั่วไปคือ 10 ปี แต่มีข้อยกเว้น เช่น ค่าจ้าง ค่าเช่า สินค้า = 2 ปี | ค่าเสียหายละเมิด = 1 ปีนับแต่รู้ถึงการละเมิดและผู้กระทำ | นิติกรรมสัญญาทั่วไป = 10 ปี')">
+            <h4>อายุความคดีแพ่ง <i class="fas fa-chevron-right"></i></h4>
+            <p>ระยะเวลาสิทธิ์ฟ้องคดีแพ่งตามประเภทคดี</p>
+            <span class="law-tag">ป.พ.พ. มาตรา 193/30</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div style="font-size:1.05rem;font-weight:700;color:rgba(255,255,255,.75);margin-bottom:.4rem">Lex<span style="color:var(--gold)">AI</span> <span style="font-weight:400;font-size:.8rem;letter-spacing:.1em;color:rgba(255,255,255,.4)">THAILAND</span></div>
+    <p>⚠️ ข้อมูลทั้งหมดมีวัตถุประสงค์เพื่อการศึกษาเท่านั้น ไม่ใช่คำปรึกษาทางกฎหมายอย่างเป็นทางการ</p>
+    <p style="margin-top:.6rem;font-size:.75rem;color:rgba(255,255,255,.25)">© 2025 LexAI Thailand · Powered by Google Gemini AI</p>
+  </footer>
+</div>
+
+<!-- ========== REFERENCES ========== -->
+<div id="page-refs" class="page">
+  <div class="ph"><div class="ph-in"><div class="bc"><span onclick="showPage('home')" style="cursor:pointer">หน้าแรก</span> <i class="fas fa-chevron-right" style="font-size:.7rem"></i> <span>แหล่งอ้างอิง</span></div><h1><i class="fas fa-link" style="color:var(--gold)"></i> แหล่งอ้างอิงและทรัพยากรกฎหมาย</h1><p>เว็บไซต์ทางการและหนังสือแนะนำสำหรับศึกษากฎหมายไทย</p></div></div>
+  <div class="refs-wrap">
+    <!-- SECTION A: เว็บไซต์ -->
+    <div class="ref-sec-title"><i class="fas fa-globe"></i> เว็บไซต์อ้างอิงทางการ</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-top">
+          <div class="ref-ico"><i class="fas fa-landmark"></i></div>
+          <div class="ref-info"><h3>สำนักงานคณะกรรมการกฤษฎีกา</h3><div class="ref-type">หน่วยงานรัฐ • krisdika.go.th</div></div>
+        </div>
+        <p class="ref-desc">ฐานข้อมูลกฎหมายไทยฉบับสมบูรณ์ ค้นหาประมวลกฎหมาย พ.ร.บ. กฎกระทรวง และคำวินิจฉัยได้ฟรี ข้อมูลอัปเดตล่าสุด</p>
+        <a class="ref-btn" href="https://www.krisdika.go.th" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> เปิดเว็บไซต์</a>
+      </div>
+      <div class="ref-card">
+        <div class="ref-top">
+          <div class="ref-ico"><i class="fas fa-newspaper"></i></div>
+          <div class="ref-info"><h3>ราชกิจจานุเบกษา</h3><div class="ref-type">หน่วยงานรัฐ • ratchakitcha.soc.go.th</div></div>
+        </div>
+        <p class="ref-desc">ประกาศราชการ กฎหมายใหม่ และประกาศต่าง ๆ ของทางราชการ แหล่งอ้างอิงอย่างเป็นทางการที่สุดของกฎหมายไทย</p>
+        <a class="ref-btn" href="https://ratchakitcha.soc.go.th" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> เปิดเว็บไซต์</a>
+      </div>
+      <div class="ref-card">
+        <div class="ref-top">
+          <div class="ref-ico"><i class="fas fa-balance-scale"></i></div>
+          <div class="ref-info"><h3>ฐานข้อมูลคำพิพากษาศาลฎีกา</h3><div class="ref-type">ศาลฎีกา • supremecourt.or.th</div></div>
+        </div>
+        <p class="ref-desc">ค้นหาคำพิพากษาศาลฎีกา บรรทัดฐานทางกฎหมาย และ Case Study จากคดีจริงที่ตัดสินแล้ว มีมากกว่า 200,000 คำพิพากษา</p>
+        <a class="ref-btn" href="https://deka.supremecourt.or.th" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> เปิดเว็บไซต์</a>
+      </div>
+      <div class="ref-card">
+        <div class="ref-top">
+          <div class="ref-ico"><i class="fas fa-hammer"></i></div>
+          <div class="ref-info"><h3>กรมบังคับคดี</h3><div class="ref-type">กระทรวงยุติธรรม • led.go.th</div></div>
+        </div>
+        <p class="ref-desc">ข้อมูลการบังคับคดี ประกาศขายทอดตลาด ตรวจสอบทรัพย์สินถูกยึด และขั้นตอนการบังคับคดีตามคำพิพากษา</p>
+        <a class="ref-btn" href="https://www.led.go.th" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> เปิดเว็บไซต์</a>
+      </div>
+      <div class="ref-card">
+        <div class="ref-top">
+          <div class="ref-ico"><i class="fas fa-shield-alt"></i></div>
+          <div class="ref-info"><h3>สำนักงานอัยการสูงสุด</h3><div class="ref-type">อัยการ • ago.go.th</div></div>
+        </div>
+        <p class="ref-desc">ข้อมูลกระบวนการอัยการ การคุ้มครองสิทธิ์ประชาชน บริการให้คำปรึกษาทางกฎหมายฟรีจากอัยการ</p>
+        <a class="ref-btn" href="https://www.ago.go.th" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> เปิดเว็บไซต์</a>
+      </div>
+      <div class="ref-card">
+        <div class="ref-top">
+          <div class="ref-ico"><i class="fas fa-hard-hat"></i></div>
+          <div class="ref-info"><h3>กรมสวัสดิการและคุ้มครองแรงงาน</h3><div class="ref-type">กระทรวงแรงงาน • labour.go.th</div></div>
+        </div>
+        <p class="ref-desc">กฎหมายแรงงาน สิทธิ์ลูกจ้าง อัตราค่าจ้างขั้นต่ำ การยื่นคำร้องเรื่องแรงงาน และแบบฟอร์มต่าง ๆ</p>
+        <a class="ref-btn" href="https://www.labour.go.th" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> เปิดเว็บไซต์</a>
+      </div>
+      <div class="ref-card">
+        <div class="ref-top">
+          <div class="ref-ico"><i class="fas fa-shopping-basket"></i></div>
+          <div class="ref-info"><h3>สำนักงานคณะกรรมการคุ้มครองผู้บริโภค (สคบ.)</h3><div class="ref-type">สคบ. • ocpb.go.th</div></div>
+        </div>
+        <p class="ref-desc">ร้องเรียนปัญหาผู้บริโภค สินค้าไม่ได้มาตรฐาน โฆษณาเกินจริง สัญญาไม่เป็นธรรม และข้อมูลคุ้มครองผู้บริโภค</p>
+        <a class="ref-btn" href="https://www.ocpb.go.th" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> เปิดเว็บไซต์</a>
+      </div>
+      <div class="ref-card">
+        <div class="ref-top">
+          <div class="ref-ico"><i class="fas fa-globe-asia"></i></div>
+          <div class="ref-info"><h3>Thai Law Forum</h3><div class="ref-type">ข้อมูลกฎหมาย (EN) • thailawforum.com</div></div>
+        </div>
+        <p class="ref-desc">แหล่งข้อมูลกฎหมายไทยภาษาอังกฤษ บทความวิเคราะห์กฎหมาย การลงทุน ธุรกิจ และคดีที่น่าสนใจ</p>
+        <a class="ref-btn" href="https://www.thailawforum.com" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> เปิดเว็บไซต์</a>
+      </div>
+    </div>
+
+    <!-- SECTION B: หนังสือ -->
+    <div class="ref-sec-title"><i class="fas fa-book-open"></i> หนังสือกฎหมายแนะนำ</div>
+    <div class="book-grid">
+      <div class="book-card">
+        <div class="book-cov" style="background:linear-gradient(135deg,#1a2744,#243460)"><span>📕</span></div>
+        <div class="book-info">
+          <h3>ประมวลกฎหมายแพ่งและพาณิชย์ (ป.พ.พ.)</h3>
+          <div class="book-auth">คณะกรรมการกฤษฎีกา</div>
+          <div class="book-pub">สำนักพิมพ์วิญญูชน • ฉบับปรับปรุงล่าสุด</div>
+          <p class="book-desc">รวบรวมกฎหมายแพ่งและพาณิชย์ทั้งหมด ครอบคลุมนิติกรรม สัญญา ทรัพย์สิน ครอบครัว มรดก เหมาะสำหรับศึกษาและอ้างอิง</p>
+        </div>
+      </div>
+      <div class="book-card">
+        <div class="book-cov" style="background:linear-gradient(135deg,#7c3aed,#8b5cf6)"><span>📗</span></div>
+        <div class="book-info">
+          <h3>ประมวลกฎหมายอาญา</h3>
+          <div class="book-auth">คณะกรรมการกฤษฎีกา</div>
+          <div class="book-pub">สำนักพิมพ์วิญญูชน • ฉบับปรับปรุงล่าสุด</div>
+          <p class="book-desc">รวบรวมกฎหมายอาญาทั้งหมด ฐานความผิด โทษ และข้อยกเว้น พร้อมหมายเหตุและคำอธิบายประกอบ</p>
+        </div>
+      </div>
+      <div class="book-card">
+        <div class="book-cov" style="background:linear-gradient(135deg,#d97706,#f59e0b)"><span>📘</span></div>
+        <div class="book-info">
+          <h3>กฎหมายแรงงาน</h3>
+          <div class="book-auth">ศาสตราจารย์ ดร.เกษมสันต์ วิลาวรรณ</div>
+          <div class="book-pub">สำนักพิมพ์วิญญูชน</div>
+          <p class="book-desc">อธิบายกฎหมายแรงงานอย่างละเอียด ครอบคลุมสิทธิ์ลูกจ้าง หน้าที่นายจ้าง ค่าชดเชย วันลา และกระบวนการระงับข้อพิพาทแรงงาน</p>
+        </div>
+      </div>
+      <div class="book-card">
+        <div class="book-cov" style="background:linear-gradient(135deg,#059669,#10b981)"><span>📙</span></div>
+        <div class="book-info">
+          <h3>กฎหมายที่ดิน</h3>
+          <div class="book-auth">ธงชัย ตันติวิทย์</div>
+          <div class="book-pub">สำนักพิมพ์วิญญูชน</div>
+          <p class="book-desc">อธิบายกฎหมายที่ดินอย่างครบถ้วน โฉนด น.ส.3 สิทธิ์ครอบครอง การโอนกรรมสิทธิ์ การจดจำนอง และข้อพิพาทที่ดิน</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div style="font-size:1.05rem;font-weight:700;color:rgba(255,255,255,.75);margin-bottom:.4rem">Lex<span style="color:var(--gold)">AI</span> <span style="font-weight:400;font-size:.8rem;letter-spacing:.1em;color:rgba(255,255,255,.4)">THAILAND</span></div>
+    <p>⚠️ ข้อมูลทั้งหมดมีวัตถุประสงค์เพื่อการศึกษาเท่านั้น ไม่ใช่คำปรึกษาทางกฎหมายอย่างเป็นทางการ</p>
+    <p style="margin-top:.6rem;font-size:.75rem;color:rgba(255,255,255,.25)">© 2025 LexAI Thailand · Powered by Google Gemini AI</p>
+  </footer>
+</div>
+
+<!-- ========== LAWYERS ========== -->
+<div id="page-lawyers" class="page">
+  <div class="ph"><div class="ph-in"><div class="bc"><span onclick="showPage('home')" style="cursor:pointer">หน้าแรก</span> <i class="fas fa-chevron-right" style="font-size:.7rem"></i> <span>หาทนาย</span></div><h1><i class="fas fa-user-tie" style="color:var(--gold)"></i> หาทนายและที่ปรึกษากฎหมาย</h1><p>องค์กรและหน่วยงานให้คำปรึกษากฎหมายสำหรับประชาชน</p></div></div>
+  <div class="lawyers-wrap">
+    <div style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.25);border-radius:var(--r);padding:1rem 1.25rem;margin-bottom:1.75rem;display:flex;align-items:center;gap:.75rem">
+      <i class="fas fa-info-circle" style="color:var(--green);font-size:1.2rem"></i>
+      <span style="font-size:.9rem;color:#065f46">แต่ละองค์กรมีนโยบายค่าบริการแตกต่างกัน กรุณาดูป้ายบนการ์ดก่อนติดต่อ &nbsp;<span class="free-badge" style="vertical-align:middle"><i class="fas fa-check-circle"></i> ฟรี</span>&nbsp; = ไม่มีค่าใช้จ่าย &nbsp;<span class="paid-badge" style="vertical-align:middle"><i class="fas fa-exclamation-circle"></i> อาจมีค่าใช้จ่าย</span>&nbsp; = ขึ้นอยู่กับบริการ</span>
+    </div>
+    <div class="filter-bar">
+      <button class="fb active" onclick="filterLawyers('all',this)">ทั้งหมด (7)</button>
+      <button class="fb" onclick="filterLawyers('general',this)">ทั่วไป</button>
+      <button class="fb" onclick="filterLawyers('labour',this)">แรงงาน</button>
+      <button class="fb" onclick="filterLawyers('consumer',this)">ผู้บริโภค</button>
+    </div>
+    <div class="law-orgs" id="lawyerGrid">
+      <!-- Card 1 -->
+      <div class="org-card" data-cat="general">
+        <div class="org-top">
+          <div class="org-ico"><i class="fas fa-balance-scale"></i></div>
+          <div class="org-hinfo">
+            <h3>สภาทนายความแห่งประเทศไทย</h3>
+            <span class="sbadge"><i class="fas fa-check-circle"></i> ทั่วไป</span>
+          </div>
+        </div>
+        <div class="org-body">
+          <p class="org-desc">ให้บริการคำปรึกษากฎหมายสำหรับประชาชนทุกประเภทปัญหา ตรวจสอบทนายความที่ได้รับใบอนุญาต และช่วยเหลือผู้ยากไร้ทางกฎหมาย (การว่าจ้างทนายความมีค่าใช้จ่ายแยกต่างหาก)</p>
+          <div class="org-detail"><i class="fas fa-phone"></i> <a href="tel:026273762" style="color:inherit;text-decoration:none">02-627-3762</a></div>
+          <div class="org-detail"><i class="fas fa-clock"></i> จันทร์–ศุกร์ 09:00–16:00 น.</div>
+          <div class="org-detail"><i class="fas fa-map-marker-alt"></i> ถ.พหลโยธิน กรุงเทพฯ</div>
+          <div style="margin-top:.65rem"><span class="free-badge"><i class="fas fa-check-circle"></i> ฟรี (คำปรึกษาเบื้องต้น)</span></div>
+          <div class="org-acts">
+            <a class="btn-call" href="tel:026273762"><i class="fas fa-phone"></i> โทรหา</a>
+            <a class="btn-web" href="http://www.thaibar.or.th" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i> เว็บไซต์</a>
+          </div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="org-card" data-cat="general">
+        <div class="org-top">
+          <div class="org-ico"><i class="fas fa-shield-alt"></i></div>
+          <div class="org-hinfo">
+            <h3>สำนักงานอัยการคุ้มครองสิทธิ์และช่วยเหลือทางกฎหมาย</h3>
+            <span class="sbadge"><i class="fas fa-check-circle"></i> ทั่วไป</span>
+          </div>
+        </div>
+        <div class="org-body">
+          <p class="org-desc">หน่วยงานภายใต้สำนักงานอัยการสูงสุด ให้คำปรึกษากฎหมายและช่วยเหลือประชาชนที่ได้รับความเดือดร้อนทางกฎหมาย</p>
+          <div class="org-detail"><i class="fas fa-phone"></i> <a href="tel:025155757" style="color:inherit;text-decoration:none">02-515-5757</a></div>
+          <div class="org-detail"><i class="fas fa-clock"></i> จันทร์–ศุกร์ 08:30–16:30 น.</div>
+          <div style="margin-top:.65rem"><span class="free-badge"><i class="fas fa-check-circle"></i> ฟรี</span></div>
+          <div class="org-acts">
+            <a class="btn-call" href="tel:025155757"><i class="fas fa-phone"></i> โทรหา</a>
+            <a class="btn-web" href="https://www.ago.go.th" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i> เว็บไซต์</a>
+          </div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="org-card" data-cat="consumer">
+        <div class="org-top">
+          <div class="org-ico"><i class="fas fa-shopping-basket"></i></div>
+          <div class="org-hinfo">
+            <h3>มูลนิธิเพื่อผู้บริโภค</h3>
+            <span class="sbadge"><i class="fas fa-check-circle"></i> ผู้บริโภค</span>
+          </div>
+        </div>
+        <div class="org-body">
+          <p class="org-desc">ให้คำปรึกษาและช่วยเหลือผู้บริโภคที่ได้รับความเสียหาย ปัญหาสินค้า บริการ โฆษณาเกินจริง และสัญญาไม่เป็นธรรม</p>
+          <div class="org-detail"><i class="fas fa-phone"></i> <a href="tel:022483737" style="color:inherit;text-decoration:none">02-248-3737</a></div>
+          <div class="org-detail"><i class="fas fa-clock"></i> จันทร์–ศุกร์ 09:00–17:00 น.</div>
+          <div class="org-detail"><i class="fas fa-map-marker-alt"></i> กรุงเทพฯ</div>
+          <div style="margin-top:.65rem"><span class="free-badge"><i class="fas fa-check-circle"></i> ฟรี</span></div>
+          <div class="org-acts">
+            <a class="btn-call" href="tel:022483737"><i class="fas fa-phone"></i> โทรหา</a>
+            <a class="btn-web" href="https://www.consumerthai.org" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i> เว็บไซต์</a>
+          </div>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="org-card" data-cat="general">
+        <div class="org-top">
+          <div class="org-ico"><i class="fas fa-university"></i></div>
+          <div class="org-hinfo">
+            <h3>ศูนย์นิติศาสตร์ มหาวิทยาลัยธรรมศาสตร์</h3>
+            <span class="sbadge"><i class="fas fa-check-circle"></i> ทั่วไป</span>
+          </div>
+        </div>
+        <div class="org-body">
+          <p class="org-desc">คลินิกกฎหมายสำหรับประชาชน ดำเนินการโดยนักศึกษากฎหมายและอาจารย์ผู้เชี่ยวชาญ ช่วยเหลือคดีแพ่งและอาญา</p>
+          <div class="org-detail"><i class="fas fa-phone"></i> <a href="tel:026132121" style="color:inherit;text-decoration:none">02-613-2121</a></div>
+          <div class="org-detail"><i class="fas fa-clock"></i> จันทร์–ศุกร์ 09:00–16:00 น.</div>
+          <div class="org-detail"><i class="fas fa-map-marker-alt"></i> มธ. ท่าพระจันทร์ กรุงเทพฯ</div>
+          <div style="margin-top:.65rem"><span class="free-badge"><i class="fas fa-check-circle"></i> ฟรี</span></div>
+          <div class="org-acts">
+            <a class="btn-call" href="tel:026132121"><i class="fas fa-phone"></i> โทรหา</a>
+            <a class="btn-web" href="https://www.law.tu.ac.th" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i> เว็บไซต์</a>
+          </div>
+        </div>
+      </div>
+      <!-- Card 5 -->
+      <div class="org-card" data-cat="labour">
+        <div class="org-top">
+          <div class="org-ico"><i class="fas fa-hard-hat"></i></div>
+          <div class="org-hinfo">
+            <h3>สำนักงานสวัสดิการและคุ้มครองแรงงาน</h3>
+            <span class="sbadge"><i class="fas fa-check-circle"></i> แรงงาน</span>
+          </div>
+        </div>
+        <div class="org-body">
+          <p class="org-desc">สายด่วนปัญหาแรงงาน ให้คำปรึกษาสิทธิ์ลูกจ้าง ค่าชดเชย การเลิกจ้างไม่เป็นธรรม ค่าจ้างค้างจ่าย ตลอด 24 ชั่วโมง</p>
+          <div class="org-detail"><i class="fas fa-phone"></i> <a href="tel:1506" style="color:inherit;text-decoration:none">1506 (สายด่วน)</a></div>
+          <div class="org-detail"><i class="fas fa-clock"></i> 24 ชั่วโมง ทุกวัน</div>
+          <div style="margin-top:.65rem"><span class="free-badge"><i class="fas fa-check-circle"></i> ฟรี</span></div>
+          <div class="org-acts">
+            <a class="btn-call" href="tel:1506"><i class="fas fa-phone"></i> โทรหา 1506</a>
+            <a class="btn-web" href="https://www.labour.go.th" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i> เว็บไซต์</a>
+          </div>
+        </div>
+      </div>
+      <!-- Card 6 -->
+      <div class="org-card" data-cat="general">
+        <div class="org-top">
+          <div class="org-ico"><i class="fas fa-hands-helping"></i></div>
+          <div class="org-hinfo">
+            <h3>กรมคุ้มครองสิทธิและเสรีภาพ</h3>
+            <span class="sbadge"><i class="fas fa-check-circle"></i> ทั่วไป</span>
+          </div>
+        </div>
+        <div class="org-body">
+          <p class="org-desc">คุ้มครองสิทธิมนุษยชนและเสรีภาพขั้นพื้นฐาน ให้ความช่วยเหลือทางกฎหมายแก่ผู้ถูกละเมิดสิทธิ์และผู้ด้อยโอกาส</p>
+          <div class="org-detail"><i class="fas fa-phone"></i> <a href="tel:1111" style="color:inherit;text-decoration:none">1111 ต่อ 77</a></div>
+          <div class="org-detail"><i class="fas fa-clock"></i> จันทร์–ศุกร์ 08:30–16:30 น.</div>
+          <div style="margin-top:.65rem"><span class="free-badge"><i class="fas fa-check-circle"></i> ฟรี</span></div>
+          <div class="org-acts">
+            <a class="btn-call" href="tel:1111"><i class="fas fa-phone"></i> โทรหา 1111</a>
+            <a class="btn-web" href="https://www.rlpd.go.th" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i> เว็บไซต์</a>
+          </div>
+        </div>
+      </div>
+      <!-- Card 7 -->
+      <div class="org-card" data-cat="general">
+        <div class="org-top">
+          <div class="org-ico"><i class="fas fa-graduation-cap"></i></div>
+          <div class="org-hinfo">
+            <h3>ศูนย์ช่วยเหลือกฎหมาย ม.รามคำแหง</h3>
+            <span class="sbadge"><i class="fas fa-check-circle"></i> ทั่วไป</span>
+          </div>
+        </div>
+        <div class="org-body">
+          <p class="org-desc">ให้คำปรึกษากฎหมายแก่ประชาชน โดยนักศึกษาและอาจารย์คณะนิติศาสตร์ รับทุกประเภทคดีแพ่ง อาญา แรงงาน ครอบครัว</p>
+          <div class="org-detail"><i class="fas fa-phone"></i> <a href="tel:023108000" style="color:inherit;text-decoration:none">02-310-8000</a></div>
+          <div class="org-detail"><i class="fas fa-clock"></i> จันทร์–ศุกร์ 08:30–16:30 น.</div>
+          <div class="org-detail"><i class="fas fa-map-marker-alt"></i> ม.รามคำแหง หัวหมาก กรุงเทพฯ</div>
+          <div style="margin-top:.65rem"><span class="free-badge"><i class="fas fa-check-circle"></i> ฟรี</span></div>
+          <div class="org-acts">
+            <a class="btn-call" href="tel:023108000"><i class="fas fa-phone"></i> โทรหา</a>
+            <a class="btn-web" href="https://www.ru.ac.th" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i> เว็บไซต์</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div style="font-size:1.05rem;font-weight:700;color:rgba(255,255,255,.75);margin-bottom:.4rem">Lex<span style="color:var(--gold)">AI</span> <span style="font-weight:400;font-size:.8rem;letter-spacing:.1em;color:rgba(255,255,255,.4)">THAILAND</span></div>
+    <p>⚠️ ข้อมูลทั้งหมดมีวัตถุประสงค์เพื่อการศึกษาเท่านั้น ไม่ใช่คำปรึกษาทางกฎหมายอย่างเป็นทางการ</p>
+    <p style="margin-top:.6rem;font-size:.75rem;color:rgba(255,255,255,.25)">© 2025 LexAI Thailand · Powered by Google Gemini AI</p>
+  </footer>
+</div>
+
+<!-- ========== TEMPLATES ========== -->
+<div id="page-templates" class="page">
+  <div class="ph"><div class="ph-in"><div class="bc"><span onclick="showPage('home')" style="cursor:pointer">หน้าแรก</span> <i class="fas fa-chevron-right" style="font-size:.7rem"></i> <span>เอกสารตัวอย่าง</span></div><h1><i class="fas fa-file-alt" style="color:var(--gold)"></i> เอกสารและสัญญาตัวอย่าง</h1><p>Template สัญญาและเอกสารกฎหมายพร้อมใช้งาน ดาวน์โหลดได้ฟรี</p></div></div>
+  <div class="tpl-wrap">
+    <div class="tpl-grid">
+      <div class="tpl-card">
+        <div class="tpl-prev" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe)">🏠</div>
+        <div class="tpl-info">
+          <h3>สัญญาเช่าบ้าน/ห้องพัก</h3>
+          <p>สัญญาเช่าอสังหาริมทรัพย์มาตรฐาน ระบุสิทธิ์และหน้าที่ผู้เช่าและเจ้าของ</p>
+          <div class="tpl-tags"><span class="tpl-tag">ที่พักอาศัย</span><span class="tpl-tag">ป.พ.พ. มาตรา 537</span></div>
+          <div class="tpl-acts">
+            <button class="btn-prev" onclick="previewDoc('สัญญาเช่าบ้าน/ห้องพัก','ทำขึ้น ณ วันที่ .......เดือน.......พ.ศ.......\n\nสัญญาฉบับนี้ทำขึ้นระหว่าง\nผู้ให้เช่า: ชื่อ........................อยู่บ้านเลขที่........................\nผู้เช่า: ชื่อ........................อยู่บ้านเลขที่........................\n\nข้อ 1. ผู้ให้เช่าตกลงให้เช่า และผู้เช่าตกลงเช่า ทรัพย์สิน ตั้งอยู่ที่........................\nข้อ 2. กำหนดเวลาเช่า มีกำหนด..........เดือน ตั้งแต่วันที่.......ถึงวันที่.......\nข้อ 3. ค่าเช่าเดือนละ.................บาท กำหนดชำระทุกวันที่........ของเดือน\nข้อ 4. ผู้เช่าวางเงินมัดจำจำนวน.................บาท\nข้อ 5. ผู้เช่าจะไม่โอนสิทธิ์การเช่าหรือให้เช่าช่วงโดยมิได้รับอนุญาต')">ดูตัวอย่าง</button>
+            <button class="btn-dl" onclick="dlDoc('สัญญาเช่าบ้าน')"><i class="fas fa-download"></i> ดาวน์โหลด .doc</button>
+          </div>
+        </div>
+      </div>
+      <div class="tpl-card">
+        <div class="tpl-prev" style="background:linear-gradient(135deg,#d1fae5,#a7f3d0)">💰</div>
+        <div class="tpl-info">
+          <h3>สัญญากู้ยืมเงิน</h3>
+          <p>หนังสือสัญญากู้ยืมเงินถูกต้องตามกฎหมาย ระบุดอกเบี้ย วิธีชำระคืน</p>
+          <div class="tpl-tags"><span class="tpl-tag">การเงิน</span><span class="tpl-tag">ป.พ.พ. มาตรา 650</span></div>
+          <div class="tpl-acts">
+            <button class="btn-prev" onclick="previewDoc('สัญญากู้ยืมเงิน','ทำขึ้น ณ วันที่ .......เดือน.......พ.ศ.......\n\nข้าพเจ้า ผู้กู้ ชื่อ.........................ได้รับเงินกู้จาก ผู้ให้กู้ ชื่อ.........................\n\nจำนวนเงิน..............บาท (.................) ไปแล้วในวันทำสัญญานี้\n\nข้าพเจ้าสัญญาว่าจะชำระคืนภายในวันที่.......เดือน.......พ.ศ.......\nพร้อมดอกเบี้ยในอัตรา.......%ต่อปี ชำระเป็นรายเดือน\n\nหากผิดนัดไม่ชำระ ยินยอมให้คิดดอกเบี้ยผิดนัดในอัตราสูงสุดตามกฎหมาย')">ดูตัวอย่าง</button>
+            <button class="btn-dl" onclick="dlDoc('สัญญากู้ยืมเงิน')"><i class="fas fa-download"></i> ดาวน์โหลด .doc</button>
+          </div>
+        </div>
+      </div>
+      <div class="tpl-card">
+        <div class="tpl-prev" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">📋</div>
+        <div class="tpl-info">
+          <h3>บันทึกข้อตกลง (MOU)</h3>
+          <p>บันทึกข้อตกลงความร่วมมือระหว่างบุคคลหรือองค์กร พร้อมข้อกำหนด</p>
+          <div class="tpl-tags"><span class="tpl-tag">ธุรกิจ</span><span class="tpl-tag">ทั่วไป</span></div>
+          <div class="tpl-acts">
+            <button class="btn-prev" onclick="previewDoc('บันทึกข้อตกลง (MOU)','บันทึกข้อตกลงความร่วมมือ\n\nทำขึ้นระหว่าง\nฝ่ายที่ 1: ชื่อ/องค์กร........................\nฝ่ายที่ 2: ชื่อ/องค์กร........................\n\nวัตถุประสงค์: ทั้งสองฝ่ายตกลงร่วมมือกันใน........................\n\nขอบเขตความร่วมมือ:\n1. ฝ่ายที่ 1 มีหน้าที่........................\n2. ฝ่ายที่ 2 มีหน้าที่........................\n\nระยะเวลา: ตั้งแต่วันที่.......ถึง.......\nการยกเลิก: แจ้งล่วงหน้าไม่น้อยกว่า 30 วัน')">ดูตัวอย่าง</button>
+            <button class="btn-dl" onclick="dlDoc('บันทึกข้อตกลง-MOU')"><i class="fas fa-download"></i> ดาวน์โหลด .doc</button>
+          </div>
+        </div>
+      </div>
+      <div class="tpl-card">
+        <div class="tpl-prev" style="background:linear-gradient(135deg,#f3e8ff,#e9d5ff)">✍️</div>
+        <div class="tpl-info">
+          <h3>หนังสือมอบอำนาจ</h3>
+          <p>มอบอำนาจให้บุคคลอื่นดำเนินการแทน เหมาะสำหรับทำธุรกรรมต่างๆ</p>
+          <div class="tpl-tags"><span class="tpl-tag">ทั่วไป</span><span class="tpl-tag">ป.พ.พ. มาตรา 797</span></div>
+          <div class="tpl-acts">
+            <button class="btn-prev" onclick="previewDoc('หนังสือมอบอำนาจ','หนังสือมอบอำนาจ\n\nข้าพเจ้า ผู้มอบอำนาจ ชื่อ.........................อายุ.....ปี\nอยู่บ้านเลขที่.........................บัตรประชาชนเลข.........................\n\nขอมอบอำนาจให้ ผู้รับมอบอำนาจ ชื่อ.........................\nอยู่บ้านเลขที่.........................บัตรประชาชนเลข.........................\n\nดำเนินการแทนข้าพเจ้าใน: .........................\n\nหนังสือมอบอำนาจฉบับนี้มีผลตั้งแต่วันที่.......ถึง.......\n\nลงชื่อ.........................ผู้มอบอำนาจ\nลงชื่อ.........................พยาน')">ดูตัวอย่าง</button>
+            <button class="btn-dl" onclick="dlDoc('หนังสือมอบอำนาจ')"><i class="fas fa-download"></i> ดาวน์โหลด .doc</button>
+          </div>
+        </div>
+      </div>
+      <div class="tpl-card">
+        <div class="tpl-prev" style="background:linear-gradient(135deg,#fee2e2,#fecaca)">👷</div>
+        <div class="tpl-info">
+          <h3>สัญญาจ้างงาน</h3>
+          <p>สัญญาจ้างพนักงานหรือลูกจ้างตามมาตรฐานกฎหมายแรงงาน</p>
+          <div class="tpl-tags"><span class="tpl-tag">แรงงาน</span><span class="tpl-tag">พ.ร.บ. คุ้มครองแรงงาน</span></div>
+          <div class="tpl-acts">
+            <button class="btn-prev" onclick="previewDoc('สัญญาจ้างงาน','สัญญาจ้างงาน\n\nทำขึ้นระหว่าง นายจ้าง: ชื่อ/บริษัท........................\nและ ลูกจ้าง: ชื่อ.........................\n\nข้อ 1. ตำแหน่ง: .........................\nข้อ 2. ค่าจ้าง: .................บาทต่อเดือน\nข้อ 3. วันทำงาน: วันจันทร์–ศุกร์ เวลา.......–.......\nข้อ 4. วันลาพักร้อน: ไม่น้อยกว่า 6 วันต่อปี\nข้อ 5. สวัสดิการ: .........................\nข้อ 6. การบอกเลิกสัญญา: แจ้งล่วงหน้าไม่น้อยกว่า 30 วัน\nข้อ 7. นายจ้างและลูกจ้างตกลงปฏิบัติตาม พ.ร.บ.คุ้มครองแรงงาน 2541')">ดูตัวอย่าง</button>
+            <button class="btn-dl" onclick="dlDoc('สัญญาจ้างงาน')"><i class="fas fa-download"></i> ดาวน์โหลด .doc</button>
+          </div>
+        </div>
+      </div>
+      <div class="tpl-card">
+        <div class="tpl-prev" style="background:linear-gradient(135deg,#ccfbf1,#99f6e4)">🤝</div>
+        <div class="tpl-info">
+          <h3>หนังสือยินยอม</h3>
+          <p>หนังสือแสดงความยินยอมทั่วไป เช่น การนำภาพไปใช้ การเข้าถึงข้อมูล</p>
+          <div class="tpl-tags"><span class="tpl-tag">ทั่วไป</span><span class="tpl-tag">ความยินยอม</span></div>
+          <div class="tpl-acts">
+            <button class="btn-prev" onclick="previewDoc('หนังสือยินยอม','หนังสือยินยอม\n\nข้าพเจ้า ชื่อ.........................อายุ.....ปี\nอยู่บ้านเลขที่.........................บัตรประชาชนเลข.........................\n\nขอแสดงความยินยอมให้ ชื่อ/องค์กร.........................\nดำเนินการ: .........................\n\nข้าพเจ้ายินยอมโดยสมัครใจ ปราศจากการบังคับ และรับทราบถึงผลที่อาจเกิดขึ้นแล้ว\nหนังสือยินยอมฉบับนี้มีผลตั้งแต่วันที่.......\n\nลงชื่อ.........................ผู้ยินยอม\nลงชื่อ.........................พยาน')">ดูตัวอย่าง</button>
+            <button class="btn-dl" onclick="dlDoc('หนังสือยินยอม')"><i class="fas fa-download"></i> ดาวน์โหลด .doc</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div style="font-size:1.05rem;font-weight:700;color:rgba(255,255,255,.75);margin-bottom:.4rem">Lex<span style="color:var(--gold)">AI</span> <span style="font-weight:400;font-size:.8rem;letter-spacing:.1em;color:rgba(255,255,255,.4)">THAILAND</span></div>
+    <p>⚠️ เอกสารตัวอย่างเหล่านี้เป็นแบบฟอร์มเบื้องต้นเท่านั้น ควรปรึกษาทนายความก่อนนำไปใช้จริง</p>
+    <p style="margin-top:.6rem;font-size:.75rem;color:rgba(255,255,255,.25)">© 2025 LexAI Thailand · Powered by Google Gemini AI</p>
+  </footer>
+</div>
+
+<!-- MODAL -->
+<div class="modal-ov" id="modalOv" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="mod-hd"><h3 id="modTitle">หัวข้อ</h3><button class="mod-close" onclick="closeModalBtn()"><i class="fas fa-times"></i></button></div>
+    <div class="mod-body" id="modBody"></div>
+  </div>
+</div>
+
+<!-- SETTINGS MODAL -->
+<div class="modal-ov" id="settingsOv" onclick="if(event.target===this)closeSettings()">
+  <div class="modal" style="max-width:500px">
+    <div class="mod-hd">
+      <h3><i class="fas fa-plug" style="color:var(--gold)"></i> เชื่อมต่อ AI จริง</h3>
+      <button class="mod-close" onclick="closeSettings()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="mod-body" style="padding:1.35rem 1.5rem;display:flex;flex-direction:column;gap:.85rem">
+      <div class="s-info"><i class="fas fa-robot"></i> เมื่อเชื่อมต่อแล้ว LexAI จะตอบด้วย <strong>AI จริง</strong> — ตอบได้ทุกหัวข้อกฎหมาย รวมถึงภาษี มรดก ธุรกิจ ที่ฐานข้อมูล keyword ไม่ครอบคลุม</div>
+      <div id="apiMsgBox" style="display:none"></div>
+      <!-- Provider info -->
+      <div style="display:flex;align-items:center;gap:.65rem;background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.25);border-radius:var(--r);padding:.7rem .9rem">
+        <div style="width:2.2rem;height:2.2rem;border-radius:50%;background:linear-gradient(135deg,#4285f4,#34a853);display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0;font-size:.9rem">G</div>
+        <div>
+          <div style="font-weight:700;font-size:.87rem;color:#065f46">Google Gemini Flash</div>
+          <div style="font-size:.73rem;color:var(--g600)">gemini-1.5-flash · ฟรี 1,500 req/วัน · ไม่ต้องใช้บัตรเครดิต</div>
+        </div>
+      </div>
+      <!-- API Key -->
+      <div>
+        <label class="s-label" for="settingsKey">API Key</label>
+        <input class="s-input" type="password" id="settingsKey" placeholder="วาง API Key ที่นี่..." autocomplete="off">
+        <div id="keyHint" style="margin-top:.35rem;font-size:.77rem;color:var(--g500)"></div>
+      </div>
+      <!-- Buttons -->
+      <div style="display:flex;gap:.65rem">
+        <button class="s-btn-outline" style="flex:1" onclick="testKey()"><i class="fas fa-vial"></i> ทดสอบ</button>
+        <button class="s-btn" style="flex:2" onclick="saveKey()"><i class="fas fa-save"></i> บันทึกและใช้งาน</button>
+      </div>
+      <!-- Security note -->
+      <div style="font-size:.77rem;color:var(--g500);line-height:1.6;border-top:1px solid var(--g200);padding-top:.75rem">
+        <i class="fas fa-shield-alt" style="color:#10b981"></i> <strong>ความเป็นส่วนตัว:</strong> API Key ถูกเก็บใน <code style="background:var(--g100);padding:.1rem .3rem;border-radius:3px">localStorage</code> บนเครื่องของคุณเท่านั้น ส่งตรงไปยัง API ผู้ให้บริการที่คุณเลือก ไม่ผ่านเซิร์ฟเวอร์ใด
+      </div>
+      <!-- Clear -->
+      <div id="clearWrap" style="display:none">
+        <button onclick="clearKey()" style="width:100%;padding:.55rem;background:#fee2e2;border:1px solid #fecaca;border-radius:.5rem;font-size:.82rem;color:#991b1b;font-family:inherit;cursor:pointer;font-weight:600">
+          <i class="fas fa-trash-alt"></i> ลบ API Key และกลับใช้ keyword mode
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><i class="fas fa-check-circle" style="color:#10b981"></i> <span id="toastMsg"></span></div>
+
+<script>
+// ===== ROUTING =====
+const pages=['home','chat','library','refs','lawyers','templates'];
+function showPage(id){
+  pages.forEach(p=>{
+    document.getElementById('page-'+p).classList.remove('active');
+    const n=document.getElementById('nav-'+p);
+    const m=document.getElementById('mob-'+p);
+    if(n)n.classList.remove('active');
+    if(m)m.classList.remove('active');
+  });
+  document.getElementById('page-'+id).classList.add('active');
+  const n=document.getElementById('nav-'+id);
+  const m=document.getElementById('mob-'+id);
+  if(n)n.classList.add('active');
+  if(m)m.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ===== HAMBURGER =====
+function toggleMob(){
+  document.getElementById('mobMenu').classList.toggle('open');
+}
+
+// ===== SEARCH =====
+function doSearch(){
+  const q=document.getElementById('heroSearch').value.trim();
+  if(q){askAI(q);}
+}
+function askAI(q){
+  document.getElementById('chatInput').value=q;
+  showPage('chat');
+  setTimeout(()=>sendMsg(),300);
+}
+
+// ===== CHAT =====
+const aiResponses=[
+  // แรงงาน - ไล่ออก/เลิกจ้าง
+  {k:['ไล่ออก','เลิกจ้าง','ชดเชย','ออกจากงาน','ให้ออก','ไม่ต่อสัญญา'],
+   r:'จากที่คุณเล่ามา คุณอาจมีสิทธิ์ได้รับ **ค่าชดเชยการเลิกจ้าง** ตามกฎหมายครับ\n\n⚖️ **กฎหมายที่เกี่ยวข้อง:**\n**พ.ร.บ. คุ้มครองแรงงาน 2541 มาตรา 118** บัญญัติว่า นายจ้างที่เลิกจ้างลูกจ้างโดยไม่มีความผิด ต้องจ่ายค่าชดเชยตามอายุงาน ดังนี้\n• ทำงาน 120 วัน–1 ปี → **ค่าชดเชย 30 วัน**\n• ทำงาน 1–3 ปี → **ค่าชดเชย 90 วัน**\n• ทำงาน 3–6 ปี → **ค่าชดเชย 180 วัน**\n• ทำงาน 6–10 ปี → **ค่าชดเชย 240 วัน**\n• ทำงาน 10–20 ปี → **ค่าชดเชย 300 วัน**\n• ทำงานมากกว่า 20 ปี → **ค่าชดเชย 400 วัน**\n\n**มาตรา 17** กำหนดให้นายจ้างต้องบอกกล่าวล่วงหน้าอย่างน้อย 1 รอบการจ่ายค่าจ้าง มิฉะนั้นต้องจ่าย **ค่าบอกกล่าวล่วงหน้า** เพิ่มอีก\n\n🔗 **แหล่งอ้างอิง:**\n• [พ.ร.บ.คุ้มครองแรงงาน ฉบับเต็ม — krisdika.go.th](https://www.krisdika.go.th)\n• [กรมสวัสดิการและคุ้มครองแรงงาน — labour.go.th](https://www.labour.go.th)\n\n📋 **ขั้นตอนที่ควรดำเนินการ:**\n**ขั้นที่ 1** รวบรวมเอกสาร: สัญญาจ้าง, สลิปเงินเดือน, หนังสือเลิกจ้าง\n**ขั้นที่ 2** โทรสายด่วน **1506** (24 ชม.) หรือไปที่สำนักงานสวัสดิการฯ ในจังหวัดคุณ\n**ขั้นที่ 3** ยื่นคำร้องภายใน **30 วัน** นับจากถูกเลิกจ้าง\n**ขั้นที่ 4** หากไม่ได้รับการแก้ไข ยื่นฟ้องที่ **ศาลแรงงาน** (ไม่มีค่าธรรมเนียมศาล)',
+   c:'พ.ร.บ. คุ้มครองแรงงาน 2541 มาตรา 17, 118'},
+
+  // แรงงาน - เงินเดือนค้าง
+  {k:['เงินเดือน','ค่าจ้าง','ค้าง','ไม่จ่าย','จ่ายไม่ครบ'],
+   r:'นายจ้างค้างจ่ายค่าจ้างเป็นความผิดตามกฎหมายที่มีโทษทั้งแพ่งและอาญาครับ\n\n⚖️ **กฎหมายที่เกี่ยวข้อง:**\n**พ.ร.บ. คุ้มครองแรงงาน 2541 มาตรา 70** บัญญัติว่า นายจ้างต้องจ่ายค่าจ้างตามวันกำหนด ผิดนัดต้องบวกดอกเบี้ย **15% ต่อปี** ตั้งแต่วันผิดนัด\n**มาตรา 144** กำหนดโทษนายจ้างที่ไม่จ่ายค่าจ้าง: **จำคุกไม่เกิน 6 เดือน** หรือปรับไม่เกิน 100,000 บาท หรือทั้งจำทั้งปรับ\n\n🔗 **แหล่งอ้างอิง:**\n• [พ.ร.บ.คุ้มครองแรงงาน ฉบับเต็ม — krisdika.go.th](https://www.krisdika.go.th)\n• [ยื่นคำร้องออนไลน์ — labour.go.th](https://www.labour.go.th)\n\n📋 **ขั้นตอนที่ควรดำเนินการ:**\n**ขั้นที่ 1** เก็บหลักฐาน: สลิปเงินเดือน, Statement บัญชี, สัญญาจ้าง\n**ขั้นที่ 2** โทรแจ้ง **สายด่วน 1506** ทันที (ฟรี ตลอด 24 ชม.)\n**ขั้นที่ 3** ยื่นคำร้องที่สำนักงานสวัสดิการฯ ในพื้นที่ภายใน **2 ปี**\n**ขั้นที่ 4** มีสิทธิ์ฟ้องคดีแพ่งที่ **ศาลแรงงาน** เพื่อเรียกคืนพร้อมดอกเบี้ย 15%',
+   c:'พ.ร.บ. คุ้มครองแรงงาน 2541 มาตรา 70, 144'},
+
+  // เช่า - เงินประกัน
+  {k:['ประกัน','เงินมัดจำ','คืนเงิน','เช่า','เจ้าของบ้าน'],
+   r:'ปัญหาเงินประกันการเช่าเป็นเรื่องที่พบบ่อยมากครับ คุณมีสิทธิ์เรียกคืนได้ตามกฎหมาย\n\n⚖️ **กฎหมายที่เกี่ยวข้อง:**\n**ป.พ.พ. มาตรา 693** บัญญัติว่า เมื่อสัญญาเช่าสิ้นสุด ผู้ให้เช่าต้องคืนเงินประกัน โดยหักได้เฉพาะค่าเสียหายที่พิสูจน์ได้จริงเท่านั้น หากปฏิเสธโดยไม่มีเหตุ ผู้เช่ามีสิทธิ์เรียกดอกเบี้ย **7.5% ต่อปี**\n**ป.พ.พ. มาตรา 215** บัญญัติว่า เจ้าหนี้มีสิทธิ์เรียกค่าสินไหมทดแทนจากการผิดนัดได้\n**ป.พ.พ. มาตรา 538** กำหนดว่าสัญญาเช่าอสังหาริมทรัพย์เกิน 3 ปี ต้องทำเป็นหนังสือและจดทะเบียน\n\n🔗 **แหล่งอ้างอิง:**\n• [ประมวลกฎหมายแพ่งและพาณิชย์ — krisdika.go.th](https://www.krisdika.go.th)\n• [ปรึกษาฟรี สภาทนายความ — thaibar.or.th](https://www.thaibar.or.th)\n\n📋 **ขั้นตอนที่ควรดำเนินการ:**\n**ขั้นที่ 1** เก็บหลักฐาน: สลิปโอนเงินมัดจำ, สัญญาเช่า, รูปถ่ายสภาพห้อง\n**ขั้นที่ 2** ส่ง **หนังสือบอกกล่าว** ทางไปรษณีย์ลงทะเบียนให้เจ้าของบ้าน (มีหลักฐานการส่ง)\n**ขั้นที่ 3** รอ **7–14 วัน** หากไม่ได้รับการติดต่อกลับ\n**ขั้นที่ 4** ยื่นฟ้องที่ **ศาลแขวง** คดีมูลค่าไม่เกิน 300,000 บาท (ค่าธรรมเนียมต่ำ) หรือ **ศาลแพ่ง** กรณีมูลค่าสูงกว่า',
+   c:'ป.พ.พ. มาตรา 215, 538, 693'},
+
+  // โกงออนไลน์/ฉ้อโกง
+  {k:['หลอก','โกง','ออนไลน์','ไม่ได้ของ','ฉ้อโกง','สั่งซื้อ','โอนเงิน'],
+   r:'การโดนโกงซื้อของออนไลน์ดำเนินการได้ทั้งทางอาญาและแพ่งครับ\n\n⚖️ **กฎหมายที่เกี่ยวข้อง:**\n**ป.อาญา มาตรา 341 (ฉ้อโกง)** บัญญัติว่า ผู้ใดโดยทุจริต หลอกลวงผู้อื่นให้ส่งมอบทรัพย์สิน โทษ **จำคุกไม่เกิน 3 ปี** หรือปรับไม่เกิน 60,000 บาท\n**พ.ร.บ. ว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ 2560 มาตรา 14** กรณีหลอกลวงผ่านสื่ออิเล็กทรอนิกส์ โทษ **จำคุกไม่เกิน 5 ปี** หรือปรับไม่เกิน 100,000 บาท\n**ป.พ.พ. มาตรา 420 (ละเมิด)** มีสิทธิ์เรียกค่าเสียหายทางแพ่งได้อีกทาง\n\n🔗 **แหล่งอ้างอิง:**\n• [ร้องเรียน สคบ. ออนไลน์ — ocpb.go.th](https://www.ocpb.go.th)\n• [แจ้งความออนไลน์ — thaipoliceonline.com](https://www.thaipoliceonline.com)\n• [พ.ร.บ. คอมพิวเตอร์ — krisdika.go.th](https://www.krisdika.go.th)\n\n📋 **ขั้นตอนที่ควรดำเนินการ:**\n**ขั้นที่ 1** รวบรวมหลักฐานทันที: สกรีนช็อตบทสนทนา, หลักฐานการโอนเงิน, ข้อมูลผู้ขาย (ชื่อ, บัญชี, เบอร์)\n**ขั้นที่ 2** แจ้งความที่สถานีตำรวจท้องที่ **หรือ** แจ้งออนไลน์ที่ thaipoliceonline.com\n**ขั้นที่ 3** ร้องเรียน **สคบ. โทร 1166** เพื่อขอไกล่เกลี่ย\n**ขั้นที่ 4** แจ้งธนาคารเพื่ออายัดบัญชีผู้รับเงินทันที (ยิ่งเร็วยิ่งดี)',
+   c:'ป.อาญา มาตรา 341, พ.ร.บ.คอมพิวเตอร์ 2560 มาตรา 14'},
+
+  // ครอบครัว/หย่า
+  {k:['หย่า','ครอบครัว','สามี','ภรรยา','คู่สมรส','นอกใจ','ทอดทิ้ง'],
+   r:'เรื่องครอบครัวเป็นเรื่องละเอียดอ่อน ผมจะอธิบายตามกฎหมายให้ละเอียดนะครับ\n\n⚖️ **กฎหมายที่เกี่ยวข้อง:**\n**ป.พ.พ. มาตรา 1514** การหย่ามี 2 วิธี: (1) **หย่าโดยความยินยอม** — ทำหนังสือ ลงลายมือชื่อ พยาน 2 คน จดทะเบียนที่อำเภอ (2) **ฟ้องหย่า** — อีกฝ่ายไม่ยินยอม ต้องมีเหตุตามมาตรา 1516\n**ป.พ.พ. มาตรา 1516** เหตุฟ้องหย่าที่กฎหมายกำหนด ได้แก่:\n• อีกฝ่ายมีชู้/นอกใจ\n• ทำร้ายร่างกาย ทารุณกรรม หรือดูหมิ่น\n• **ทอดทิ้งกันเกิน 1 ปี**\n• วิกลจริตเกิน 3 ปี\n• ไม่อุปการะเลี้ยงดูอีกฝ่าย\n**ป.พ.พ. มาตรา 1533** เมื่อหย่า ให้แบ่งสินสมรส **คนละครึ่ง**\n\n🔗 **แหล่งอ้างอิง:**\n• [ประมวลกฎหมายแพ่งและพาณิชย์ บรรพ 5 — krisdika.go.th](https://www.krisdika.go.th)\n• [ปรึกษาฟรี สภาทนายความ — thaibar.or.th](https://www.thaibar.or.th)\n\n📋 **ขั้นตอนที่ควรดำเนินการ:**\n**ขั้นที่ 1** ปรึกษาทนายความฟรีที่ **สภาทนายความ โทร 02-627-3762**\n**ขั้นที่ 2** รวบรวมพยานหลักฐานสนับสนุนเหตุหย่า\n**ขั้นที่ 3** หากตกลงกันได้ → จดทะเบียนหย่าที่ **สำนักงานเขต/อำเภอ**\n**ขั้นที่ 4** หากไม่ตกลงกัน → ยื่นฟ้องที่ **ศาลเยาวชนและครอบครัว**',
+   c:'ป.พ.พ. มาตรา 1514, 1516, 1533'},
+
+  // ที่ดิน
+  {k:['ที่ดิน','โฉนด','ครอบครอง','บุกรุก','รุกที่','ที่ดินทับ'],
+   r:'ปัญหาที่ดินเป็นเรื่องสำคัญมากครับ ควรดำเนินการอย่างระมัดระวัง\n\n⚖️ **กฎหมายที่เกี่ยวข้อง:**\n**ป.พ.พ. มาตรา 1382 (ครอบครองปรปักษ์)** ผู้ครอบครองที่ดินของผู้อื่นโดยสุจริต สงบ เปิดเผย มีเจตนาเป็นเจ้าของ ติดต่อกัน **10 ปี** มีสิทธิ์ขอกรรมสิทธิ์ทางศาลได้\n**ป.พ.พ. มาตรา 1336** เจ้าของที่ดินมีสิทธิ์ขับไล่ผู้บุกรุก และเรียกค่าเสียหายได้\n**ป.อาญา มาตรา 362** บุกรุกอสังหาริมทรัพย์ผู้อื่น โทษ **จำคุกไม่เกิน 1 ปี** หรือปรับไม่เกิน 20,000 บาท\n**ประมวลกฎหมายที่ดิน มาตรา 1** กำหนดให้กรมที่ดินเป็นผู้ออกเอกสารสิทธิ์\n\n🔗 **แหล่งอ้างอิง:**\n• [กรมที่ดิน — dol.go.th](https://www.dol.go.th)\n• [ตรวจสอบโฉนดออนไลน์ — dolwms.dol.go.th](https://dolwms.dol.go.th)\n• [ประมวลกฎหมายที่ดิน — krisdika.go.th](https://www.krisdika.go.th)\n\n📋 **ขั้นตอนที่ควรดำเนินการ:**\n**ขั้นที่ 1** ตรวจสอบเอกสารสิทธิ์ที่ **กรมที่ดิน** ในพื้นที่\n**ขั้นที่ 2** รังวัดที่ดินเพื่อยืนยันแนวเขต\n**ขั้นที่ 3** หากถูกบุกรุก → แจ้งความตำรวจ ฐานบุกรุก\n**ขั้นที่ 4** ปรึกษาทนายเพื่อฟ้องขับไล่และเรียกค่าเสียหาย',
+   c:'ป.พ.พ. มาตรา 1336, 1382 และประมวลกฎหมายที่ดิน'},
+
+  // หมิ่นประมาท/ดูหมิ่น
+  {k:['หมิ่น','ดูหมิ่น','ใส่ร้าย','โพสต์','โซเชียล','ด่า','แชร์'],
+   r:'การถูกหมิ่นประมาทหรือดูหมิ่นมีทั้งโทษทางอาญาและสิทธิ์เรียกค่าเสียหายทางแพ่งครับ\n\n⚖️ **กฎหมายที่เกี่ยวข้อง:**\n**ป.อาญา มาตรา 326 (หมิ่นประมาท)** ใส่ความผู้อื่นต่อบุคคลที่สามทำให้เสียชื่อเสียง โทษ **จำคุกไม่เกิน 1 ปี** หรือปรับไม่เกิน 20,000 บาท\n**ป.อาญา มาตรา 328 (หมิ่นประมาทสื่อ)** กระทำผ่านสื่อสาธารณะ เช่น โซเชียลมีเดีย โทษ **จำคุกไม่เกิน 2 ปี** หรือปรับไม่เกิน 200,000 บาท\n**พ.ร.บ.คอมพิวเตอร์ 2560 มาตรา 14(1)** นำเข้าข้อมูลเท็จสู่ระบบคอมพิวเตอร์ โทษ **จำคุกไม่เกิน 5 ปี** หรือปรับไม่เกิน 100,000 บาท\n**ป.พ.พ. มาตรา 423** มีสิทธิ์เรียกค่าเสียหายจากการหมิ่นประมาทได้\n\n🔗 **แหล่งอ้างอิง:**\n• [ป.อาญา มาตรา 326-333 — krisdika.go.th](https://www.krisdika.go.th)\n• [พ.ร.บ.คอมพิวเตอร์ 2560 — krisdika.go.th](https://www.krisdika.go.th)\n\n📋 **ขั้นตอนที่ควรดำเนินการ:**\n**ขั้นที่ 1** **บันทึกหลักฐาน** ทันที: สกรีนช็อต URL โพสต์ วันที่เวลา ชื่อผู้โพสต์\n**ขั้นที่ 2** ยื่นแจ้งความที่สถานีตำรวจ หรือ **กองบังคับการปราบปรามการกระทำความผิดเกี่ยวกับอาชญากรรมทางเทคโนโลยี (บก.ปอท.) โทร 1441**\n**ขั้นที่ 3** ฟ้องแพ่งเรียกค่าเสียหายด้วยได้\n**ขั้นที่ 4** คดีนี้เป็น **คดีความผิดอันยอมความได้** ต้องร้องทุกข์ภายิน **3 เดือน** นับจากรู้ตัวผู้กระทำ',
+   c:'ป.อาญา มาตรา 326, 328 และ พ.ร.บ.คอมพิวเตอร์ 2560 มาตรา 14'},
+
+  // รถชน/ประกัน
+  {k:['รถชน','ประกันรถ','ค่าเสียหาย','อุบัติเหตุ','ชดใช้','ซ่อมรถ'],
+   r:'อุบัติเหตุรถชนมีกฎหมายคุ้มครองผู้เสียหายหลายมาตราครับ\n\n⚖️ **กฎหมายที่เกี่ยวข้อง:**\n**ป.พ.พ. มาตรา 420 (ละเมิด)** ผู้ขับรถโดยประมาทต้องรับผิดชดใช้ค่าเสียหายทั้งหมด รวมถึง ค่าซ่อมรถ ค่ารักษาพยาบาล และค่าเสียหายอื่น\n**พ.ร.บ. คุ้มครองผู้ประสบภัยจากรถ 2535** ผู้บาดเจ็บมีสิทธิ์รับ **ค่าเสียหายเบื้องต้น** ทันทีจากบริษัทประกัน (ไม่ต้องรอพิสูจน์ความผิด):\n• ค่ารักษาพยาบาล สูงสุด **30,000 บาท**\n• กรณีเสียชีวิต/ทุพพลภาพ สูงสุด **35,000 บาท**\n**พ.ร.บ. รถยนต์ 2522** กำหนดให้รถทุกคันต้องมีประกัน พ.ร.บ.\n\n🔗 **แหล่งอ้างอิง:**\n• [กรมการประกันภัย — oic.or.th](https://www.oic.or.th)\n• [สายด่วนประกันภัย 1186](tel:1186)\n• [พ.ร.บ.คุ้มครองผู้ประสบภัยจากรถ — krisdika.go.th](https://www.krisdika.go.th)\n\n📋 **ขั้นตอนที่ควรดำเนินการ:**\n**ขั้นที่ 1** ถ่ายรูปจุดเกิดเหตุ ป้ายทะเบียน และความเสียหายทันที\n**ขั้นที่ 2** แจ้งตำรวจและขอสำเนาบันทึกประจำวัน\n**ขั้นที่ 3** แจ้งบริษัทประกันของคุณและของฝ่ายตรงข้าม\n**ขั้นที่ 4** หากฝ่ายผิดไม่ยอมจ่าย ฟ้องศาลแขวง/ศาลแพ่ง พร้อมสำเนาบันทึกตำรวจเป็นหลักฐาน',
+   c:'ป.พ.พ. มาตรา 420, พ.ร.บ.คุ้มครองผู้ประสบภัยจากรถ 2535'},
+
+  // ทำร้ายร่างกาย/ทำร้ายร่าง/ถูกตี
+  {k:['ทำร้าย','ถูกตี','ชกต่อย','ทุบตี','ทำร้ายร่างกาย','บาดเจ็บ','ทำร้ายร่าง','ถูกทำร้าย','ทำร้ายกัน','ทะเลาะวิวาท','ต่อยหน้า','เตะ','ทุบ'],
+   r:'ผมรับทราบปัญหาของคุณเกี่ยวกับการถูกทำร้ายร่างกายแล้วครับ นี่คือสิทธิ์ตามกฎหมายที่คุณมี:\n\n⚖️ **กฎหมายที่เกี่ยวข้อง (ประมวลกฎหมายอาญา):**\n**ป.อาญา มาตรา 295 (ทำร้ายร่างกายธรรมดา)** — ผู้ใดทำร้ายร่างกายผู้อื่นจนเป็นเหตุให้ได้รับอันตรายแก่กายหรือจิตใจ **โทษจำคุกไม่เกิน 2 ปี** หรือปรับไม่เกิน 40,000 บาท หรือทั้งจำทั้งปรับ\n**ป.อาญา มาตรา 296 (ทำร้ายร่างกายสาหัส)** — กระทำจนทำให้ตาบอด หูหนวก พูดไม่ได้ หรืออวัยวะสูญเสียหน้าที่ **โทษจำคุก 2–8 ปี**\n**ป.อาญา มาตรา 297 (ทำร้ายสาหัสรุนแรง)** — อวัยวะขาดหรือเสียหายถาวร ทุพพลภาพถาวร หรือป่วยเรื้อรังเกิน 20 วัน **โทษจำคุก 3–10 ปี**\n**ป.พ.พ. มาตรา 420 (ละเมิด)** — นอกจากคดีอาญา ยังฟ้องแพ่งเรียก **ค่ารักษาพยาบาล + ค่าขาดรายได้ + ค่าเสียหายอื่น** ได้อีกทางหนึ่ง\n\n🔗 **กฎหมายฉบับเต็ม:**\n• [ป.อาญา มาตรา 295-300 ฉบับเต็ม — krisdika.go.th](https://www.krisdika.go.th)\n• [คำพิพากษาฎีกาคดีทำร้ายร่างกาย — deka2007.in.th](https://www.deka2007.in.th)\n\n📋 **ขั้นตอนที่ควรดำเนินการทันที:**\n**ขั้นที่ 1** ไปพบแพทย์และขอ **"ใบรับรองแพทย์ระบุบาดแผล"** ทันที — เป็นหลักฐานสำคัญที่สุด\n**ขั้นที่ 2** ถ่ายรูปบาดแผลทุกจุดและเก็บหลักฐานเพิ่ม เช่น กล้องวงจรปิด พยานที่เห็นเหตุการณ์\n**ขั้นที่ 3** แจ้งความที่สถานีตำรวจท้องที่ที่เกิดเหตุ — คดีนี้อายุความ **3 เดือน** นับจากรู้ตัวผู้กระทำ\n**ขั้นที่ 4** ปรึกษาทนายเพื่อฟ้องแพ่งเรียกค่าเสียหายเพิ่ม → **สภาทนายความ 02-627-3762** หรือ **กรมคุ้มครองสิทธิ 1111 ต่อ 77**\n\n💡 หากต้องการข้อมูลเพิ่มเติม กรุณาบอกครับว่า บาดเจ็บมากน้อยแค่ไหน? ผู้ทำร้ายเป็นใคร? มีพยานหรือกล้องวงจรปิดหรือไม่?',
+   c:'ป.อาญา มาตรา 295, 296, 297 และ ป.พ.พ. มาตรา 420'},
+
+  // ผู้บริโภค/สินค้า
+  {k:['สินค้า','ชำรุด','บกพร่อง','ผู้บริโภค','คืนของ','โฆษณา','เกินจริง'],
+   r:'ในฐานะผู้บริโภค คุณมีสิทธิ์ที่กฎหมายคุ้มครองอย่างชัดเจนครับ\n\n⚖️ **กฎหมายที่เกี่ยวข้อง:**\n**พ.ร.บ. คุ้มครองผู้บริโภค 2522 มาตรา 4** กำหนดสิทธิ์ผู้บริโภค 5 ประการ: สิทธิ์ได้รับความปลอดภัย, สิทธิ์ได้รับข้อมูลจริง, สิทธิ์เลือกซื้ออย่างอิสระ, สิทธิ์ได้รับความเป็นธรรม, สิทธิ์ร้องเรียน\n**ป.พ.พ. มาตรา 472** ผู้ขายรับผิดชอบในความชำรุดบกพร่องของสินค้า แม้จะไม่รู้ว่ามีข้อบกพร่อง\n**พ.ร.บ. ความรับผิดต่อความเสียหายที่เกิดจากสินค้าไม่ปลอดภัย 2551** ผู้ผลิต/ผู้นำเข้าต้องรับผิดโดยไม่ต้องพิสูจน์ความผิด\n\n🔗 **แหล่งอ้างอิง:**\n• [ร้องเรียน สคบ. ออนไลน์ — ocpb.go.th](https://www.ocpb.go.th)\n• [มูลนิธิเพื่อผู้บริโภค — consumerthai.org](https://www.consumerthai.org)\n• [สายด่วน สคบ. 1166](tel:1166)\n\n📋 **ขั้นตอนที่ควรดำเนินการ:**\n**ขั้นที่ 1** เก็บหลักฐาน: ใบเสร็จ, รูปถ่ายสินค้า, บันทึกการสื่อสารกับผู้ขาย\n**ขั้นที่ 2** ติดต่อผู้ขาย/ร้านค้าเป็นลายลักษณ์อักษรก่อน\n**ขั้นที่ 3** ร้องเรียนที่ **สคบ. โทร 1166** หรือ ocpb.go.th\n**ขั้นที่ 4** ปรึกษา **มูลนิธิเพื่อผู้บริโภค โทร 02-248-3737** เพื่อขอความช่วยเหลือต่อ',
+   c:'พ.ร.บ.คุ้มครองผู้บริโภค 2522 มาตรา 4, ป.พ.พ. มาตรา 472'}
+];
+
+function getAIResponse(msg){
+  const m=msg;
+  for(const r of aiResponses){
+    if(r.k.some(k=>m.includes(k)))return r;
+  }
+  // Clarification fallback: ถามรายละเอียดเพิ่มเพื่อให้ตอบได้ตรงประเด็น
+  const topic=msg.length>30?msg.substring(0,30)+'...':msg;
+  return {
+    r:'ขอบคุณที่ปรึกษาครับ ผมต้องการรายละเอียดเพิ่มเติมเพื่อจะได้ให้ข้อมูลกฎหมายที่ตรงกับสถานการณ์ของคุณครับ\n\n❓ **ช่วยบอกผมเพิ่มเติมได้ไหมครับ:**\n• **เรื่องนี้เกิดขึ้นในบริบทใด?** เช่น ที่ทำงาน / ที่พักอาศัย / ออนไลน์ / ครอบครัว / ที่สาธารณะ\n• **ใครเป็นผู้กระทำ?** เช่น นายจ้าง / คู่ค้า / บุคคลแปลกหน้า / สมาชิกในครอบครัว\n• **คุณได้รับความเสียหายอย่างไร?** เช่น เสียเงิน / บาดเจ็บร่างกาย / เสียชื่อเสียง / สูญเสียสิทธิ์\n• **มีหลักฐานหรือพยานหรือไม่?**\n\n📌 **ตัวอย่างปัญหาที่ผมให้ข้อมูลกฎหมายได้:**\n• แรงงาน: "โดนเลิกจ้าง / เงินเดือนค้าง / ถูกกลั่นแกล้ง"\n• ที่พักอาศัย: "ไม่คืนเงินประกัน / ขับไล่ออกจากห้อง"\n• อาญา: "ถูกทำร้ายร่างกาย / โดนโกง / ถูกหมิ่นประมาท"\n• ครอบครัว: "ต้องการหย่า / แบ่งทรัพย์สิน / ปัญหาสิทธิ์ลูก"\n• ที่ดิน: "ถูกบุกรุก / ปัญหาโฉนด / ครอบครองปรปักษ์"\n• ผู้บริโภค: "สินค้าชำรุด / โฆษณาเกินจริง / ถูกหักเงินโดยไม่ยินยอม"\n\n💬 กรุณาบอกรายละเอียดเพิ่มเติม แล้วผมจะให้ข้อมูลกฎหมายและขั้นตอนที่ตรงกับปัญหาของคุณโดยเฉพาะครับ',
+    c:''
+  };
+}
+
+function formatMsg(text){
+  return text
+    .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g,'<a href="$2" target="_blank" rel="noopener noreferrer" style="color:var(--gold);text-decoration:underline;font-weight:600">$1 <i class=\"fas fa-external-link-alt\" style=\"font-size:.7rem\"></i></a>')
+    .replace(/\n/g,'<br>');
+}
+
+function appendMsg(type,text,cite){
+  const box=document.getElementById('chatMsgs');
+  const d=document.createElement('div');
+  d.className='msg '+type;
+  const now=new Date();
+  const t=now.getHours()+':'+String(now.getMinutes()).padStart(2,'0');
+  if(type==='user'){
+    d.innerHTML=`<div class="av"><i class="fas fa-user"></i></div><div><div class="bub">${text}</div><div style="font-size:.73rem;color:var(--g400);margin-top:.25rem;text-align:right">${t}</div></div>`;
+  } else {
+    d.innerHTML=`<div class="av"><i class="fas fa-robot"></i></div><div><div class="bub">${formatMsg(text)}${cite?'<div class="cite"><i class="fas fa-book-open"></i> อ้างอิง: '+cite+'</div>':''}</div><div style="font-size:.73rem;color:var(--g400);margin-top:.25rem">LexAI • ${t}</div></div>`;
+  }
+  box.appendChild(d);
+  box.scrollTop=box.scrollHeight;
+}
+
+function showTyping(){
+  const box=document.getElementById('chatMsgs');
+  const d=document.createElement('div');
+  d.className='msg ai';d.id='typing';
+  d.innerHTML='<div class="av"><i class="fas fa-robot"></i></div><div><div class="typing"><div class="td"></div><div class="td"></div><div class="td"></div></div></div>';
+  box.appendChild(d);box.scrollTop=box.scrollHeight;
+}
+function removeTyping(){const t=document.getElementById('typing');if(t)t.remove();}
+
+let chatHistory=[];
+
+async function sendMsg(){
+  const inp=document.getElementById('chatInput');
+  const msg=inp.value.trim();
+  if(!msg)return;
+  appendMsg('user',msg);
+  inp.value='';
+  chatHistory.push({role:'user',content:msg});
+  showTyping();
+  const s=getApiSettings();
+  if(s.key){
+    try{
+      const reply=await callAI(msg,s);
+      removeTyping();
+      if(reply){
+        chatHistory.push({role:'assistant',content:reply});
+        appendMsg('ai',reply,'AI · '+(s.provider==='openai'?'OpenAI GPT-4o mini':'Google Gemini'));
+        return;
+      }
+    }catch(e){console.warn('API failed, falling back:',e.message);}
+    removeTyping();
+  }
+  setTimeout(()=>{
+    removeTyping();
+    const res=getAIResponse(msg);
+    if(res.c)chatHistory.push({role:'assistant',content:res.r});
+    appendMsg('ai',res.r,res.c);
+  },s.key?0:1200+Math.random()*800);
+}
+
+function sendQuick(q){
+  document.getElementById('chatInput').value=q;
+  sendMsg();
+}
+
+// ===== LAWYER FILTER =====
+function filterLawyers(cat,btn){
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.org-card').forEach(c=>{
+    c.style.display=(cat==='all'||c.dataset.cat===cat)?'block':'none';
+  });
+}
+
+// ===== LAW MODAL =====
+function openLawModal(title,short,detail){
+  document.getElementById('modTitle').textContent=title;
+  document.getElementById('modBody').innerHTML=`<p>${short}</p><div class="law-ref"><i class="fas fa-book" style="color:var(--gold)"></i> <strong>บทบัญญัติกฎหมาย</strong><br>${detail}</div><h4>แนะนำหากมีปัญหานี้:</h4><p>หากคุณประสบปัญหาที่เกี่ยวข้อง สามารถ <a href="#" onclick="showPage('lawyers');closeModalBtn()" style="color:var(--gold)">ติดต่อทนายฟรี</a> หรือ <a href="#" onclick="showPage('chat');closeModalBtn()" style="color:var(--gold)">ถาม AI</a> เพื่อรับคำแนะนำเพิ่มเติมได้เลยครับ</p>`;
+  document.getElementById('modalOv').classList.add('open');
+}
+
+function previewDoc(title,content){
+  document.getElementById('modTitle').textContent='ตัวอย่าง: '+title;
+  document.getElementById('modBody').innerHTML=`<div style="background:var(--g50);border-radius:var(--r);padding:1.25rem;font-family:monospace;font-size:.87rem;line-height:1.9;white-space:pre-wrap;border:1px solid var(--g200)">${content}</div><p style="margin-top:1rem;font-size:.84rem;color:var(--g600)">⚠️ นี่คือตัวอย่างเบื้องต้นเท่านั้น ควรปรึกษาทนายความก่อนนำไปใช้จริง</p>`;
+  document.getElementById('modalOv').classList.add('open');
+}
+
+function closeModal(e){if(e.target===document.getElementById('modalOv'))closeModalBtn();}
+function closeModalBtn(){document.getElementById('modalOv').classList.remove('open');}
+
+// ===== DOWNLOAD =====
+const TEMPLATES={
+  'สัญญาเช่าบ้าน':{
+    title:'สัญญาเช่าบ้าน/ห้องพัก',
+    ref:'ป.พ.พ. มาตรา 537',
+    body:`ทำขึ้น ณ วันที่ .......เดือน.......พ.ศ.......
+
+สัญญาฉบับนี้ทำขึ้นระหว่าง
+ผู้ให้เช่า: ชื่อ........................ อยู่บ้านเลขที่........................
+          บัตรประชาชนเลข.........................
+ผู้เช่า:   ชื่อ........................ อยู่บ้านเลขที่........................
+          บัตรประชาชนเลข.........................
+
+ข้อ 1. ผู้ให้เช่าตกลงให้เช่า และผู้เช่าตกลงเช่า ทรัพย์สินตั้งอยู่ที่........................
+ข้อ 2. กำหนดเวลาเช่า มีกำหนด..........เดือน ตั้งแต่วันที่.......ถึงวันที่.......
+ข้อ 3. ค่าเช่าเดือนละ.................บาท กำหนดชำระทุกวันที่........ของเดือน
+ข้อ 4. ผู้เช่าวางเงินมัดจำจำนวน.................บาท
+ข้อ 5. ผู้เช่าจะไม่โอนสิทธิ์การเช่าหรือให้เช่าช่วงโดยมิได้รับอนุญาตเป็นลายลักษณ์อักษร
+ข้อ 6. เมื่อสัญญาสิ้นสุด ผู้เช่าต้องส่งมอบทรัพย์สินในสภาพเรียบร้อย
+ข้อ 7. ผู้ให้เช่าต้องคืนเงินมัดจำภายใน 30 วัน หลังสัญญาสิ้นสุดและไม่มีความเสียหาย
+
+
+ลงชื่อ.........................ผู้ให้เช่า     ลงชื่อ.........................ผู้เช่า
+วันที่...............................          วันที่...............................
+
+ลงชื่อ.........................พยาน (1)    ลงชื่อ.........................พยาน (2)`
+  },
+  'สัญญากู้ยืมเงิน':{
+    title:'สัญญากู้ยืมเงิน',
+    ref:'ป.พ.พ. มาตรา 650–653',
+    body:`ทำขึ้น ณ วันที่ .......เดือน.......พ.ศ.......
+
+ข้าพเจ้า ผู้กู้ ชื่อ.........................อายุ.....ปี
+อยู่บ้านเลขที่.........................บัตรประชาชนเลข.........................
+ได้รับเงินกู้จาก ผู้ให้กู้ ชื่อ.........................
+อยู่บ้านเลขที่.........................บัตรประชาชนเลข.........................
+
+จำนวนเงิน..............บาท (....................)
+ไปแล้วในวันทำสัญญานี้ครบถ้วนแล้ว
+
+ข้าพเจ้าสัญญาว่าจะชำระคืนภายในวันที่.......เดือน.......พ.ศ.......
+พร้อมดอกเบี้ยในอัตรา.......% ต่อปี ชำระเป็นรายเดือนภายในวันที่.....ของทุกเดือน
+
+หากผิดนัดไม่ชำระ ยินยอมให้คิดดอกเบี้ยผิดนัดในอัตราสูงสุดตามกฎหมาย (ไม่เกิน 15% ต่อปี)
+และยินยอมรับผิดค่าใช้จ่ายในการติดตามทวงถามทั้งหมด
+
+
+ลงชื่อ.........................ผู้กู้         ลงชื่อ.........................ผู้ให้กู้
+วันที่...............................          วันที่...............................
+
+ลงชื่อ.........................พยาน (1)    ลงชื่อ.........................พยาน (2)`
+  },
+  'บันทึกข้อตกลง-MOU':{
+    title:'บันทึกข้อตกลงความร่วมมือ (MOU)',
+    ref:'กฎหมายทั่วไป',
+    body:`บันทึกข้อตกลงความร่วมมือ (Memorandum of Understanding)
+
+ทำขึ้น ณ วันที่ .......เดือน.......พ.ศ.......
+
+ระหว่าง
+ฝ่ายที่ 1: ชื่อ/องค์กร........................ ตั้งอยู่ที่........................
+ฝ่ายที่ 2: ชื่อ/องค์กร........................ ตั้งอยู่ที่........................
+
+วัตถุประสงค์:
+ทั้งสองฝ่ายตกลงร่วมมือกันใน........................
+
+ขอบเขตความร่วมมือ:
+1. ฝ่ายที่ 1 มีหน้าที่........................
+2. ฝ่ายที่ 2 มีหน้าที่........................
+3. ทรัพย์สินทางปัญญาที่เกิดขึ้นจากความร่วมมือเป็นของ........................
+
+ระยะเวลา:
+บันทึกข้อตกลงฉบับนี้มีผลตั้งแต่วันที่.......ถึงวันที่.......
+
+การยกเลิก:
+ฝ่ายใดฝ่ายหนึ่งสามารถยกเลิกได้โดยแจ้งเป็นลายลักษณ์อักษรล่วงหน้าไม่น้อยกว่า 30 วัน
+
+
+ลงชื่อ.........................ฝ่ายที่ 1    ลงชื่อ.........................ฝ่ายที่ 2
+วันที่...............................          วันที่...............................`
+  },
+  'หนังสือมอบอำนาจ':{
+    title:'หนังสือมอบอำนาจ',
+    ref:'ป.พ.พ. มาตรา 797–832',
+    body:`หนังสือมอบอำนาจ
+
+ทำขึ้น ณ วันที่ .......เดือน.......พ.ศ.......
+
+ข้าพเจ้า ผู้มอบอำนาจ ชื่อ.........................อายุ.....ปี
+อยู่บ้านเลขที่.........................บัตรประชาชนเลข.........................
+โทรศัพท์.........................
+
+ขอมอบอำนาจให้ ผู้รับมอบอำนาจ ชื่อ.........................อายุ.....ปี
+อยู่บ้านเลขที่.........................บัตรประชาชนเลข.........................
+
+ดำเนินการแทนข้าพเจ้าดังนี้:
+1. .........................
+2. .........................
+3. .........................
+
+ข้าพเจ้าขอรับรองว่าผู้รับมอบอำนาจดังกล่าวมีอำนาจกระทำการใดๆ
+ในขอบเขตที่ระบุไว้ข้างต้นแทนข้าพเจ้าได้ทุกประการ
+
+หนังสือมอบอำนาจฉบับนี้มีผลตั้งแต่วันที่.......ถึงวันที่.......
+
+
+ลงชื่อ.........................ผู้มอบอำนาจ
+วันที่...............................
+
+ลงชื่อ.........................พยาน (1)    ลงชื่อ.........................พยาน (2)`
+  },
+  'สัญญาจ้างงาน':{
+    title:'สัญญาจ้างงาน',
+    ref:'พ.ร.บ. คุ้มครองแรงงาน 2541',
+    body:`สัญญาจ้างงาน
+
+ทำขึ้น ณ วันที่ .......เดือน.......พ.ศ.......
+
+ระหว่าง
+นายจ้าง: ชื่อ/บริษัท........................ ตั้งอยู่ที่........................
+และ
+ลูกจ้าง: ชื่อ.........................อายุ.....ปี
+         อยู่บ้านเลขที่.........................บัตรประชาชนเลข.........................
+
+ข้อ 1. ตำแหน่ง: .........................
+ข้อ 2. ค่าจ้าง: .................บาทต่อเดือน จ่ายทุกวันที่.....ของเดือน
+ข้อ 3. วันและเวลาทำงาน: วันจันทร์–ศุกร์ เวลา.......น.–.......น.
+ข้อ 4. วันลาพักร้อน: ไม่น้อยกว่า 6 วันทำงานต่อปี (หลังทำงานครบ 1 ปี)
+ข้อ 5. วันลาป่วย: ได้รับค่าจ้างไม่เกิน 30 วันต่อปี
+ข้อ 6. สวัสดิการ: .........................
+ข้อ 7. การบอกเลิกสัญญา: แจ้งล่วงหน้าไม่น้อยกว่า 30 วัน หรือจ่ายค่าจ้างแทนการบอกกล่าว
+ข้อ 8. ค่าชดเชย: เป็นไปตาม พ.ร.บ. คุ้มครองแรงงาน พ.ศ. 2541 มาตรา 118
+ข้อ 9. นายจ้างและลูกจ้างตกลงปฏิบัติตาม พ.ร.บ. คุ้มครองแรงงาน 2541 ทุกประการ
+
+
+ลงชื่อ.........................นายจ้าง      ลงชื่อ.........................ลูกจ้าง
+วันที่...............................          วันที่...............................
+
+ลงชื่อ.........................พยาน`
+  },
+  'หนังสือยินยอม':{
+    title:'หนังสือยินยอม',
+    ref:'กฎหมายทั่วไป',
+    body:`หนังสือยินยอม
+
+ทำขึ้น ณ วันที่ .......เดือน.......พ.ศ.......
+
+ข้าพเจ้า ชื่อ.........................อายุ.....ปี
+อยู่บ้านเลขที่.........................บัตรประชาชนเลข.........................
+โทรศัพท์.........................
+
+ขอแสดงความยินยอมให้ ชื่อ/องค์กร.........................
+ที่อยู่.........................
+
+ดำเนินการดังต่อไปนี้:
+.........................
+
+ข้าพเจ้ายินยอมโดยสมัครใจ ปราศจากการบังคับขู่เข็ญใดๆ
+และรับทราบถึงผลที่อาจเกิดขึ้นจากการดำเนินการดังกล่าวแล้ว
+
+ข้าพเจ้ามีสิทธิ์ถอนความยินยอมนี้ได้ตลอดเวลา โดยแจ้งเป็นลายลักษณ์อักษร
+
+หนังสือยินยอมฉบับนี้มีผลตั้งแต่วันที่.......
+
+
+ลงชื่อ.........................ผู้ยินยอม
+วันที่...............................
+
+ลงชื่อ.........................พยาน (1)    ลงชื่อ.........................พยาน (2)`
+  }
+};
+
+function dlDoc(key){
+  const tpl=TEMPLATES[key];
+  if(!tpl){showToast('❌ ไม่พบเทมเพลต');return;}
+  const today=new Date();
+  const dd=String(today.getDate()).padStart(2,'0');
+  const mm=String(today.getMonth()+1).padStart(2,'0');
+  const yy=today.getFullYear()+543;
+  const dateStr=dd+'/'+mm+'/'+yy;
+  const html='\ufeff<!DOCTYPE html><html><head><meta charset="UTF-8">'+
+    '<style>body{font-family:"Sarabun",sans-serif;font-size:14pt;line-height:2;padding:2.5cm 3cm;color:#1a1a1a}'+
+    'h1{font-size:16pt;text-align:center;font-weight:700;margin-bottom:1.5em;border-bottom:1px solid #333;padding-bottom:.5em}'+
+    '.ref{font-size:10pt;color:#666;text-align:center;margin-bottom:2em}'+
+    'pre{font-family:"Sarabun",sans-serif;white-space:pre-wrap;font-size:13pt;line-height:2}'+
+    '.footer{font-size:9pt;color:#999;text-align:center;margin-top:3em;border-top:1px solid #ddd;padding-top:.5em}'+
+    '</style></head><body>'+
+    '<h1>'+tpl.title+'</h1>'+
+    '<div class="ref">อ้างอิง: '+tpl.ref+'</div>'+
+    '<pre>'+tpl.body+'</pre>'+
+    '<div class="footer">⚠️ เอกสารนี้เป็นแบบฟอร์มเบื้องต้นจาก LexAI เพื่อการศึกษาเท่านั้น ควรปรึกษาทนายความก่อนนำไปใช้จริง | สร้างเมื่อ '+dateStr+'</div>'+
+    '</body></html>';
+  const blob=new Blob([html],{type:'application/msword'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=tpl.title+'.doc';
+  document.body.appendChild(a);a.click();
+  document.body.removeChild(a);URL.revokeObjectURL(url);
+  showToast('📥 ดาวน์โหลด "'+tpl.title+'.doc" เรียบร้อยแล้ว');
+}
+
+// ===== TOAST =====
+function showToast(msg){
+  const t=document.getElementById('toast');
+  document.getElementById('toastMsg').textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// ===== AI API =====
+// 🔑 ใส่ Gemini API Key ที่นี่ (รับฟรีที่ aistudio.google.com/app/apikey)
+const GEMINI_KEY='AIzaSyDGrYcH-aojb5TeowUB0VkaxzoJGJ4OlKQ';
+
+const API_SYS=`คุณคือ LexAI ผู้ช่วยกฎหมายไทยที่เชี่ยวชาญ ตอบเป็นภาษาไทยเสมอ
+
+แนวทางการตอบ:
+- อ้างอิงชื่อกฎหมายและมาตราที่เกี่ยวข้องอย่างชัดเจน เช่น "ป.อาญา มาตรา 295" หรือ "พ.ร.บ.คุ้มครองแรงงาน 2541 มาตรา 118"
+- อธิบายสิทธิ์ ขั้นตอน และแนวทางปฏิบัติ 3-5 ขั้น ด้วยภาษาที่เข้าใจง่าย
+- แนะนำหน่วยงานและเบอร์โทรที่เกี่ยวข้อง เช่น สายด่วนแรงงาน 1506, สภาทนายความ 02-627-3762, กรมคุ้มครองสิทธิ 1111, สคบ. 1166
+- ใช้ **bold** สำหรับชื่อกฎหมาย มาตรา และข้อมูลสำคัญ
+- ถ้าคำถามกว้างเกิน ให้ถามรายละเอียดเพิ่มเติมก่อน
+- ถ้าถูกถามให้ทำนายผลคดี รับรองเอกสาร หรือดำเนินคดีแทน ให้บอกข้อจำกัดนั้นอย่างชัดเจน เช่น "ผมให้ข้อมูลเบื้องต้นได้ แต่การทำนายผลคดีไม่สามารถทำได้เพราะขึ้นอยู่กับพยาน ข้อเท็จจริง และดุลยพินิจผู้พิพากษา" แล้วแนะนำให้ปรึกษาทนาย
+- ลงท้ายด้วยคำเตือนสั้นๆ ว่าเป็นข้อมูลเบื้องต้น ควรปรึกษาทนายสำหรับคดีจริง`;
+
+function getApiSettings(){
+  const storedKey=localStorage.getItem('lexai_key');
+  const storedProv=localStorage.getItem('lexai_provider');
+  // ใช้ GEMINI_KEY ที่ hardcode ไว้เป็น default ถ้ายังไม่มี user key
+  const key=storedKey||GEMINI_KEY;
+  const provider=storedProv||(GEMINI_KEY?'gemini':'openai');
+  return{key,provider};
+}
+
+async function callAI(msg,s){
+  const hist=chatHistory.slice(-8).slice(0,-1); // last 4 exchanges (exclude current user msg already pushed)
+  if(s.provider==='openai'){
+    const resp=await fetch('https://api.openai.com/v1/chat/completions',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+s.key},
+      body:JSON.stringify({model:'gpt-4o-mini',messages:[{role:'system',content:API_SYS},...hist,{role:'user',content:msg}],max_tokens:1400,temperature:0.3})
+    });
+    if(!resp.ok){const e=await resp.json();throw new Error(e.error?.message||'HTTP '+resp.status);}
+    const d=await resp.json();
+    return d.choices?.[0]?.message?.content||null;
+  }
+  if(s.provider==='gemini'){
+    const contents=[...hist.map(m=>({role:m.role==='assistant'?'model':'user',parts:[{text:m.content}]})),{role:'user',parts:[{text:msg}]}];
+    const resp=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${s.key}`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({system_instruction:{parts:[{text:API_SYS}]},contents,generationConfig:{maxOutputTokens:1400,temperature:0.3}})
+    });
+    if(!resp.ok){const e=await resp.json();throw new Error(e.error?.message||'HTTP '+resp.status);}
+    const d=await resp.json();
+    return d.candidates?.[0]?.content?.parts?.[0]?.text||null;
+  }
+  return null;
+}
+
+// ===== SETTINGS MODAL =====
+let _selProvider=localStorage.getItem('lexai_provider')||(GEMINI_KEY?'gemini':'openai');
+
+function openSettings(){
+  const s=getApiSettings();
+  _selProvider=s.provider;
+  // แสดงเฉพาะ user key (ไม่แสดง hardcoded key เพื่อความปลอดภัย)
+  const userKey=localStorage.getItem('lexai_key')||'';
+  document.getElementById('settingsKey').value=userKey;
+  document.getElementById('settingsOv').classList.add('open');
+  document.getElementById('clearWrap').style.display=userKey?'block':'none';
+  // แสดง status ตาม source ของ key
+  if(!userKey&&GEMINI_KEY){
+    showApiMsg('s-info','<i class="fas fa-check-circle" style="color:#10b981"></i> <strong>Gemini AI เชื่อมต่ออยู่แล้ว!</strong> ระบบใช้ API Key ในตัวแอปอยู่แล้ว ไม่ต้องตั้งค่าอะไรเพิ่มครับ');
+  }else{
+    document.getElementById('apiMsgBox').style.display='none';
+  }
+  selectProvider(s.provider);
+}
+function closeSettings(){document.getElementById('settingsOv').classList.remove('open');}
+
+function selectProvider(p){
+  _selProvider=p;
+  ['openai','gemini'].forEach(x=>{
+    const t=document.getElementById('tab-'+x);
+    if(t)t.classList.toggle('active',x===p);
+  });
+  document.getElementById('keyHint').innerHTML=p==='openai'
+    ?'รับ API Key ฟรีที่ → <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener noreferrer" style="color:var(--navy);font-weight:600">platform.openai.com/api-keys</a>'
+    :'รับ API Key ฟรีที่ → <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" style="color:var(--navy);font-weight:600">aistudio.google.com/app/apikey</a>';
+}
+
+function showApiMsg(cls,html){
+  const b=document.getElementById('apiMsgBox');
+  b.className=cls;b.innerHTML=html;b.style.display='block';
+}
+
+async function testKey(){
+  const key=document.getElementById('settingsKey').value.trim();
+  if(!key){showApiMsg('s-err','<i class="fas fa-times-circle"></i> กรุณาใส่ API Key ก่อน');return;}
+  showApiMsg('s-info','<i class="fas fa-spinner fa-spin"></i> กำลังทดสอบ...');
+  try{
+    const r=await callAI('สวัสดี ทดสอบระบบ ตอบว่า "ทดสอบสำเร็จ" เป็นภาษาไทยเท่านั้น',{key,provider:_selProvider});
+    if(r)showApiMsg('s-info','<i class="fas fa-check-circle"></i> <strong>เชื่อมต่อสำเร็จ!</strong> API Key ใช้งานได้ กด "บันทึกและใช้งาน" เลยครับ');
+    else showApiMsg('s-err','<i class="fas fa-times-circle"></i> ไม่ได้รับการตอบกลับ กรุณาตรวจสอบ Key อีกครั้ง');
+  }catch(e){showApiMsg('s-err','<i class="fas fa-times-circle"></i> '+e.message);}
+}
+
+function saveKey(){
+  const key=document.getElementById('settingsKey').value.trim();
+  localStorage.setItem('lexai_key',key);
+  localStorage.setItem('lexai_provider',_selProvider);
+  updateApiBadge();
+  document.getElementById('clearWrap').style.display=key?'block':'none';
+  showApiMsg('s-info','<i class="fas fa-check-circle"></i> <strong>บันทึกแล้ว!</strong> '+(key?'LexAI จะใช้ AI จริงตอบคำถามของคุณแล้วครับ 🎉':'ลบ Key แล้ว กลับสู่ keyword mode'));
+  if(key)setTimeout(closeSettings,1500);
+}
+
+function clearKey(){
+  document.getElementById('settingsKey').value='';
+  saveKey();
+}
+
+function updateApiBadge(){
+  const s=getApiSettings();
+  const badge=document.getElementById('apiBadge');
+  const dot=document.getElementById('apiDot');
+  const lbl=document.getElementById('apiLabel');
+  if(!badge)return;
+  if(s.key){
+    badge.className='api-badge api-badge-on';
+    dot.className='api-dot api-dot-on';
+    lbl.textContent='เชื่อมต่อข้อมูล Gemini ✓';
+  }else{
+    badge.className='api-badge api-badge-off';
+    dot.className='api-dot api-dot-off';
+    lbl.textContent='เชื่อมต่อข้อมูล Gemini';
+  }
+}
+
+document.addEventListener('DOMContentLoaded',updateApiBadge);
+</script>
+</body>
+</html>
