@@ -42,7 +42,7 @@ nav{background:var(--navy);position:sticky;top:0;z-index:200;box-shadow:0 2px 12
 .bc span{color:var(--gold)}
 
 /* HOME HERO */
-.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);padding:5rem 1.5rem 4rem;text-align:center;position:relative;overflow:hidden}
+.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);padding:2rem 1.5rem 3.5rem;text-align:center;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-40%;left:-15%;width:55%;height:180%;background:radial-gradient(circle,rgba(201,168,76,.08) 0%,transparent 70%)}
 .hero-badge{display:inline-flex;align-items:center;gap:.45rem;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:var(--gold2);padding:.3rem 1rem;border-radius:50px;font-size:.82rem;margin-bottom:1.4rem}
 .hero h1{color:#fff;font-size:2.7rem;font-weight:800;line-height:1.2;margin-bottom:.9rem;position:relative;z-index:1}
@@ -310,9 +310,7 @@ footer a{color:var(--gold);text-decoration:none}
 <!-- ========== HOME ========== -->
 <div id="page-home" class="page active">
   <div class="hero">
-    <div class="hero-badge"><i class="fas fa-shield-alt"></i> ระบบปัญญาประดิษฐ์ทางกฎหมาย</div>
-    <h1>ผู้ช่วยกฎหมาย <span>AI</span><br>สำหรับทุกคน</h1>
-    <p>เข้าถึงข้อมูลกฎหมายไทยได้ง่ายขึ้น ค้นหา ศึกษา และรับคำแนะนำเบื้องต้นจาก AI โดยไม่ต้องมีพื้นฐานด้านกฎหมาย</p>
+    <img src="Banner.png" alt="LexAI Thailand — ผู้ช่วยกฎหมาย AI สำหรับทุกคน" style="max-width:900px;width:100%;border-radius:16px;display:block;margin:0 auto 2.5rem;box-shadow:0 8px 40px rgba(0,0,0,.4);position:relative;z-index:1">
     <div class="hero-search">
       <i class="fas fa-search si"></i>
       <input type="text" id="heroSearch" placeholder="ค้นหา เช่น โดนไล่ออกไม่ยุติธรรม, ถูกโกงเงิน, สัญญาเช่า..." onkeydown="if(event.key==='Enter')doSearch()">
